@@ -1,4 +1,4 @@
-# Program to retrieve all partner universities (SCHL) => ~2 hours
+# Program to retrieve all organisations (that start with E...) => ~2 hours
 import os
 import sys
 import json

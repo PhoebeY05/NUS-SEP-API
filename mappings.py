@@ -1,3 +1,5 @@
+# Program to retrieve all past course mappings => ~2 hours
+
 import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -72,12 +74,178 @@ def fill_search_field(root, field_selector, value):
 
 
 def has_results(root):
-    # Fluid results table
-    fluid_table = root.query_selector("#PTSRCHRESULTS") or root.query_selector("table.PSSRCHRESULTSWBO")
-    # Legacy grid
-    legacy_table = root.query_selector("table.PSLEVEL1GRID")
-    no_records = root.locator(f"text={NO_RECORDS_TEXT}").count() > 0
-    return (fluid_table is not None or legacy_table is not None) and not no_records
+    # Consider multiple table variants used by PeopleSoft
+    table_variants = [
+        "#PTSRCHRESULTS",
+        "table.PSSRCHRESULTSWBO",
+        "table#N_EXSP_DRVD$scroll$0",
+        "table.PSLEVEL1GRIDWBO",
+        "table.PSLEVEL1GRID",
+    ]
+    exists = False
+    for sel in table_variants:
+        try:
+            if root.locator(sel).count() > 0:
+                exists = True
+                break
+        except Exception:
+            continue
+    no_records = False
+    try:
+        no_records = root.locator(f"text={NO_RECORDS_TEXT}").count() > 0
+    except Exception:
+        no_records = False
+    return exists and not no_records
+
+
+def wait_for_results_or_empty(root, timeout_ms: int = 20000):
+    """Wait until any known results table appears or the 'No matching records' text shows."""
+    table_variants = [
+        "#PTSRCHRESULTS",
+        "table.PSSRCHRESULTSWBO",
+        "table#N_EXSP_DRVD$scroll$0",
+        "table.PSLEVEL1GRIDWBO",
+        "table.PSLEVEL1GRID",
+    ]
+    deadline = timeout_ms
+    step = 500
+    waited = 0
+    while waited < deadline:
+        if has_results(root) or root.locator(f"text={NO_RECORDS_TEXT}").count() > 0:
+            return True
+        try:
+            # Try to nudge layout to render
+            for sel in table_variants:
+                try:
+                    root.eval_on_selector(sel, "el => { el.scrollTop = el.scrollHeight; }")
+                except Exception:
+                    continue
+            root.evaluate("() => { const s = document.scrollingElement || document.body; s.scrollTop = s.scrollHeight; }")
+        except Exception:
+            pass
+        root.wait_for_timeout(step)
+        waited += step
+    return False
+
+
+def read_download_to_df(path):
+    """Read a downloaded export file into a DataFrame.
+    Detects legacy XLS (OLE, xlrd), modern XLSX (ZIP, openpyxl), or HTML exports
+    (PeopleSoft often sends HTML tables with an .xls filename).
+    Returns a tuple of (df, fmt) where fmt is one of 'xls' | 'xlsx' | 'html'.
+    """
+    fmt = None
+    head = b""
+    try:
+        with open(path, "rb") as f:
+            head = f.read(4096)
+    except Exception as e:
+        raise ValueError(f"Unable to read downloaded file: {e}")
+
+    # OLE Compound File (legacy .xls)
+    if head.startswith(b"\xD0\xCF\x11\xE0"):
+        fmt = "xls"
+        return pd.read_excel(path, engine="xlrd"), fmt
+
+    # ZIP header (modern .xlsx)
+    if head.startswith(b"PK"):
+        fmt = "xlsx"
+        # openpyxl handles .xlsx content; extension mismatch is fine
+        return pd.read_excel(path, engine="openpyxl"), fmt
+
+    # HTML-based export (often served with .xls extension)
+    if (b"<!DOCTYPE" in head) or (b"<html" in head.lower()):
+        fmt = "html"
+        tables = pd.read_html(path)
+        if not tables:
+            raise ValueError("HTML export contained no tables")
+        # Choose the largest table heuristically
+        df = max(tables, key=lambda d: (d.shape[0] * d.shape[1]))
+        return df, fmt
+
+    raise ValueError("Unknown or unsupported export format (not XLS/XLSX/HTML)")
+
+
+def click_download_excel(root, page):
+    """Robustly trigger the Excel download for the mappings grid.
+    Tries multiple selectors and a direct JS submitAction fallback.
+    Returns the Playwright Download object.
+    """
+    # Candidate selectors: prefer the anchor, then the image, then alt/title fallbacks
+    candidates = [
+        "a[id^='N_EXSP_DRVD$hexcel$']",
+        "a[name^='N_EXSP_DRVD$hexcel$']",
+        "img[id^='N_EXSP_DRVD$hexcel$img']",
+        "img.PTDOWNLOAD",
+        "[role='button'][title*='Download']",
+        "img[alt*='Download']",
+    ]
+    # Ensure element is in view and clickable
+    for sel in candidates:
+        try:
+            loc = root.locator(sel).first
+            if loc.count() == 0:
+                continue
+            try:
+                loc.scroll_into_view_if_needed()
+            except Exception:
+                pass
+            # Attempt anchor click with expect_download
+            try:
+                with page.expect_download(timeout=15000) as d:
+                    loc.click(force=True)
+                return d.value
+            except Exception:
+                # Try a dispatch event as fallback
+                try:
+                    with page.expect_download(timeout=15000) as d:
+                        loc.dispatch_event("click")
+                    return d.value
+                except Exception:
+                    pass
+        except Exception:
+            continue
+
+    # Direct JS fallback: call PeopleSoft submitAction with the anchor id
+    try:
+        # Find anchor id if present
+        a = root.locator("a[id^='N_EXSP_DRVD$hexcel$']").first
+        if a.count() > 0:
+            aid = a.get_attribute("id")
+            if aid:
+                # Ensure function exists on window; invoke with expect_download
+                try:
+                    with page.expect_download(timeout=15000) as d:
+                        root.evaluate("(id) => { if (window.submitAction_win2) submitAction_win2(document.win2, id); }", aid)
+                    return d.value
+                except Exception:
+                    pass
+        # If only the image is found, derive the anchor id by stripping '$img'
+        img = root.locator("img[id^='N_EXSP_DRVD$hexcel$img']").first
+        if img.count() > 0:
+            iid = img.get_attribute("id") or ""
+            if iid and iid.endswith("img$0"):
+                aid = iid.replace("img$0", "$0")
+            else:
+                aid = iid.replace("img", "")
+            try:
+                with page.expect_download(timeout=15000) as d:
+                    root.evaluate("(id) => { if (window.submitAction_win2) submitAction_win2(document.win2, id); }", aid)
+                return d.value
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    # Last resort: use the global DOWNLOAD_ICON constant directly
+    try:
+        with page.expect_download(timeout=15000) as d:
+            root.click(DOWNLOAD_ICON)
+        return d.value
+    except Exception:
+        pass
+
+    raise PlaywrightTimeoutError("Failed to trigger Excel download via all methods")
 
 def process_combination(faculty, uni):
     """Download CSV for one faculty/university combo with retries.
@@ -129,22 +297,19 @@ def process_combination(faculty, uni):
                 root.click("text=Search")
 
             # Wait for either results or an empty-state message
-            for _ in range(40):  # ~20s max
-                if has_results(root) or root.locator(f"text={NO_RECORDS_TEXT}").count() > 0:
-                    break
-                root.wait_for_timeout(500)
+            wait_for_results_or_empty(root, timeout_ms=20000)
 
             if not has_results(root):
                 print(f"⚠️ No results: {fname} | {uni.get('name') or uni.get('id')}")
                 return None
 
-            with page.expect_download(timeout=15000) as d:
-                root.click(DOWNLOAD_ICON)
-            download = d.value
+            # Robustly trigger the Excel download
+            download = click_download_excel(root, page)
             xls_path = os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{uname_id.replace(' ','_')}.xls")
             download.save_as(xls_path)
 
-            df = pd.read_excel(xls_path, engine="xlrd")
+            df, fmt = read_download_to_df(xls_path)
+            print(f"📄 Parsed export format: {fmt}")
             df["Faculty"] = faculty.get("name")
             df["Faculty ID"] = faculty.get("id")
             df["University"] = uni.get("name")
@@ -199,18 +364,15 @@ with sync_playwright() as p:
     SEARCH_PAGE = target_page.url
 
     # Process all combinations sequentially to avoid cross-thread page/context issues
-    # for f in faculties:
-    #     for u in partner_unis:
-    #         disp_f = f.get('id')
-    #         disp_u = u.get('id')
-    #         print(f"➡️ Processing: {disp_f} | {disp_u}")
-    #         df = process_combination(f, u)
-    #         if df is not None:
-    #             all_csvs.append(df)
+    for f in faculties:
+        for u in partner_unis:
+            disp_f = f.get('id')
+            disp_u = u.get('id')
+            print(f"➡️ Processing: {disp_f} | {disp_u}")
+            df = process_combination(f, u)
+            if df is not None:
+                all_csvs.append(df)
 
-    df = process_combination(faculties[2], partner_unis[1172])
-    if df is not None:
-        all_csvs.append(df)
 
     context.close()
     browser.close()

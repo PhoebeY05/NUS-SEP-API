@@ -1,5 +1,7 @@
 playwright==1.57.0
 pandas==2.3.3
 xlrd==2.0.2
+openpyxl==3.1.5
+lxml==5.3.0
 fastapi==0.115.5
 uvicorn[standard]==0.32.0
