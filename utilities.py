@@ -1,4 +1,5 @@
 from datetime import datetime
+
 import pandas as pd
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 
@@ -136,7 +137,7 @@ def print_new_stage(msg):
 
 def get_partner_universities():
     organisations = derive_items_from_csv(
-        "downloads/organisations.csv",
+        "data/organisations.csv",
         value_cols=["org", "search", "name"],
     )
     partner_universities = list(filter(lambda u: u.get('org') == "SCHL", organisations))

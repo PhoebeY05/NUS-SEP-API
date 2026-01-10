@@ -8,7 +8,7 @@ from playwright.sync_api import sync_playwright
 from utilities import close_modal, derive_items_from_csv, navigate_to_search_course_mappings, resolve_component_root
 
 EDUREC_HOME = "https://myedurec.nus.edu.sg"
-DOWNLOAD_DIR = "downloads"
+DOWNLOAD_DIR = "data"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 SEARCH_PAGE = None
 FACULTIES_CSV = os.path.join(DOWNLOAD_DIR, "faculties.csv")

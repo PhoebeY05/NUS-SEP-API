@@ -12,7 +12,7 @@ from utilities import (close_modal, derive_items_from_csv,
                        resolve_component_root)
 
 EDUREC_HOME = "https://myedurec.nus.edu.sg"
-DOWNLOAD_DIR = "downloads"
+DOWNLOAD_DIR = "data"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 SEARCH_PAGE = None
 ORG_CSV = os.path.join(DOWNLOAD_DIR, "organisations.csv")
