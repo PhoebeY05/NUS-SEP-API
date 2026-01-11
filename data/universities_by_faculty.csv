@@ -1,0 +1,368 @@
+faculty,country,university
+BIZ,Australia,Australian National University
+BIZ,Australia,Monash University
+BIZ,Australia,Queensland University of Technology
+BIZ,Australia,University of Melbourne
+BIZ,Australia,University of New South Wales
+BIZ,Austria,Vienna University of Economics and Business
+BIZ,Belgium,"Catholic University of Louvain, Louvain School of Management"
+BIZ,Belgium,University of Antwerp
+BIZ,Belgium,"University of Brussels, Solvay Business School"
+BIZ,Brazil,FGV EAESP - Fundação Getulio Vargas São Paulo School of Business Administration
+BIZ,Canada,HEC Montréal
+BIZ,Canada,Queen's University Smith School of Business
+BIZ,Canada,Western University Ivey Business School
+BIZ,Canada,York University Schulich School of Business
+BIZ,China,"Chinese University of Hong Kong, Shenzhen"
+BIZ,China,Peking University Guanghua School of Management
+BIZ,China,Tsinghua University School of Economics and Management
+BIZ,China,"Zhejiang University, International Business School"
+BIZ,Denmark,Aarhus University
+BIZ,Denmark,Copenhagen Business School
+BIZ,Finland,"Aalto University, Helsinki"
+BIZ,Finland,"Aalto University, Mikkeli"
+BIZ,France,ESSEC Business School
+BIZ,France,HEC Paris
+BIZ,Germany,European Business School
+BIZ,Germany,Mannheim Business School
+BIZ,Germany,Technical University of Munich
+BIZ,Germany,University of Cologne
+BIZ,Germany,WHU-Otto Beisheim School of Management
+BIZ,Hong Kong,Chinese University of Hong Kong
+BIZ,Hong Kong,City University of Hong Kong College of Business
+BIZ,Hong Kong,Hong Kong University of Science and Technology School of Business and Management
+BIZ,Hong Kong,University of Hong Kong Business School
+BIZ,Hungary,Corvinus University of Budapest
+BIZ,Ireland,University College Dublin
+BIZ,Italy,University of Commerce 'Luigi Bocconi' Milan
+BIZ,Mexico,ITAM – Autonomous Technological Institute of Mexico
+BIZ,Netherlands,Maastricht University
+BIZ,Netherlands,"Rotterdam School of Management, Erasmus University"
+BIZ,Netherlands,Tilburg University
+BIZ,New Zealand,University of Auckland
+BIZ,Norway,BI Norwegian Business School
+BIZ,Norway,Norwegian School of Economics
+BIZ,Poland,Warsaw School of Economics
+BIZ,Portugal,"Catholic University of Portugal, Católica Lisbon School of Business and Economics"
+BIZ,Portugal,Nova School of Business and Economics
+BIZ,Slovenia,University of Ljubljana
+BIZ,South Korea,Korea University Business School
+BIZ,South Korea,Seoul National University Business School
+BIZ,South Korea,Yonsei University
+BIZ,Spain,ESADE Business School
+BIZ,Spain,IE Business School
+BIZ,Spain,University of Navarra
+BIZ,Sweden,Lund University
+BIZ,Sweden,Stockholm School of Economics
+BIZ,Sweden,Stockholm University
+BIZ,Sweden,Uppsala University
+BIZ,Switzerland,University of Lausanne
+BIZ,Switzerland,University of St Gallen
+BIZ,Taiwan,National Chengchi University College of Commerce
+BIZ,Taiwan,National Taiwan University College of Management
+BIZ,Turkiye,Sabanci University
+BIZ,USA,Michigan State University
+BIZ,USA,Tulane University School of Business
+BIZ,USA,University of Michigan Ross School of Business
+BIZ,USA,University of North Carolina at Chapel Hill Kenan-Flagler Business School
+BIZ,USA,"University of Texas at Austin, McCombs School of Business"
+BIZ,USA,University of Wisconsin-Madison
+BIZ,United Kingdom,City University of London
+BIZ,United Kingdom,University of Bath
+BIZ,United Kingdom,University of Leeds
+BIZ,United Kingdom,University of Manchester
+BIZ,United Kingdom,University of Warwick
+CDE,Brazil,University of Sao Paulo
+CDE,China,Southeast University
+CDE,China,Tianjin University
+CDE,Czech Republic,Czech Technical University in Prague
+CDE,Denmark,Aalborg University
+CDE,Denmark,University of Southern Denmark
+CDE,Finland,Aalto University
+CDE,Finland,Tampere University
+CDE,Finland,University of Oulu
+CDE,France,ENSCI Les Ateliers - Ecole National Superieure de Creation Industrielle
+CDE,France,Ecole Speciale d'Architecture
+CDE,France,ISAE-Supaero
+CDE,France,Institut Superieur de Design
+CDE,France,Strate School of Design
+CDE,Germany,Esslingen University of Applied Sciences
+CDE,Germany,Technical University of Berlin
+CDE,Germany,University of Wuppertal
+CDE,Hong Kong,Hong Kong University of Science and Technology
+CDE,India,"Indian Institute of Technology, Bombay"
+CDE,Italy,Polytechnic University of Milan (Politecnico di Milano)
+CDE,Italy,Polytechnic University of Turin (Politecnico di Torino)
+CDE,Japan,Kyoto Institute of Technology
+CDE,Japan,Meiji University
+CDE,South Africa,Stellenbosch University
+CDE,South Korea,Ewha Womans University
+CDE,South Korea,Hanyang University
+CDE,South Korea,University of Seoul
+CDE,Spain,UIC Catalunya
+CDE,Spain,University of Navarra
+CDE,Sweden,Blekinge Institute of Technology
+CDE,Sweden,Linkoping University
+CDE,Switzerland,ECAL – University of Art and Design Lausanne
+CDE,Taiwan,National Taiwan University of Science and Technology
+CDE,Taiwan,Tunghai University
+CDE,Thailand,Chulalongkorn University
+CDE,USA,Cooper Union for the Advancement of Science and Art
+CDE,USA,Franklin W. Olin College of Engineering
+CDE,USA,Iowa State University
+CDE,USA,John Hopkins University
+CDE,USA,Ohio State University
+CDE,USA,University of Delaware
+CDE,USA,University of Minnesota
+CDE,USA,University of Pennsylvania
+CDE,USA,Vanderbilt University
+CDE,United Kingdom,Loughborough University
+CDE,United Kingdom,University of Aberdeen
+CDE,United Kingdom,University of Southamptom
+CDE,United Kingdom,University of Strathclyde
+FASS,China,"Chinese University of Hong Kong, Shenzhen"
+FASS,France,Sciences Po Bordeaux
+FASS,Germany,Georg-August-University
+FASS,Indonesia,University of Gadjah Mada
+FASS,Italy,Bocconi University
+FASS,Japan,Akita International University
+FASS,Japan,International Christian University
+FASS,Japan,Kwansei Gakuin University
+FASS,Japan,Meiji University (School of Global Japanese Studies)
+FASS,Japan,Rikkyo University
+FASS,Japan,Ritsumeikan University
+FASS,Japan,Tokyo University of Foreign Studies
+FASS,Netherlands,"Erasmus School of History, Culture and Communication"
+FASS,Netherlands,Erasmus School of Social and Behavioural Sciences
+FASS,Netherlands,Leiden University
+FASS,Netherlands,Maastricht University
+FASS,South Korea,Ewha Womans University
+FASS,South Korea,Hankuk University of Foreign Studies
+FASS,Sweden,Stockholm School of Economics
+FASS,Taiwan,National Chengchi University
+FASS,USA,University of Kansas
+FASS,United Kingdom,Loughborough University
+FoS,Australia,La Trobe University
+FoS,Australia,University of Newcastle
+FoS,Austria,Management Center Innsbruck Internationale Hochschule GmbH
+FoS,Germany,Georg-August-University
+FoS,Germany,RPTU Kaiserslautern-Landau
+FoS,Hong Kong,Chinese University of Hong Kong
+FoS,Hong Kong,City University of Hong Kong
+FoS,Hong Kong,Hong Kong University of Science and Technology
+FoS,Hong Kong,University of Hong Kong
+FoS,Ireland,University College Cork
+FoS,Italy,Catholic University of the Sacred Heart
+FoS,Japan,University of Tokyo (College of Arts and Sciences)
+FoS,Netherlands,Leiden University (Faculty of Science)
+FoS,Netherlands,Leiden University Medical Centre
+FoS,Netherlands,Radbound University Nijmegen
+FoS,Sweden,Karolinska Institute
+FoS,Taiwan,Chang Gung University
+FoS,USA,Colgate University
+FoS,United Kingdom,University of Dundee
+NUSC,China,Peking University
+NUSC,Japan,Rikkyo University
+NUSC,South Korea,Seoul National University
+NUSC,USA,Amherst College
+NUSC,USA,Smith College
+NUSC,USA,Vassar College
+NUSC,USA,Wellesley College
+SoC,Hong Kong,Hong Kong University of Science and Technology School of Engineering
+SoC,Sweden,Karolinska Institute
+SoC,Sweden,Stockholm University
+U-wide,Australia,Adelaide University
+U-wide,Australia,Australian National University
+U-wide,Australia,Monash University
+U-wide,Australia,University of Melbourne
+U-wide,Australia,University of New South Wales
+U-wide,Australia,University of Queensland
+U-wide,Australia,University of Sydney
+U-wide,Australia,University of Western Australia
+U-wide,Austria,University of Innsbruck
+U-wide,Belgium,KU Leuven
+U-wide,Belgium,University of Antwerp
+U-wide,Canada,Concordia University
+U-wide,Canada,Dalhousie University 
+U-wide,Canada,McGill University
+U-wide,Canada,McMaster University
+U-wide,Canada,Queen’s University at Kingston
+U-wide,Canada,Simon Fraser University
+U-wide,Canada,University of Alberta
+U-wide,Canada,University of British Columbia 
+U-wide,Canada,University of Calgary
+U-wide,Canada,University of Guelph
+U-wide,Canada,University of Ottawa
+U-wide,Canada,University of Toronto
+U-wide,Canada,University of Victoria
+U-wide,Canada,University of Waterloo
+U-wide,Canada,Western University
+U-wide,Canada,York University
+U-wide,China,Chongqing University
+U-wide,China,Fudan University
+U-wide,China,Nanjing University
+U-wide,China,Peking University
+U-wide,China,Shanghai Jiao Tong University
+U-wide,China,Tongji University
+U-wide,China,Tsinghua University
+U-wide,China,Xiamen University
+U-wide,China,Zhejiang University
+U-wide,Croatia,University of Zagreb
+U-wide,Denmark,Aarhus University
+U-wide,Denmark,Technical University of Denmark
+U-wide,Denmark,University of Copenhagen
+U-wide,Estonia,Tallinn University of Technology
+U-wide,Finland,University of Helsinki
+U-wide,France,CentraleSupélec
+U-wide,France,INSA Lyon – National Institute of Applied Sciences of Lyon
+U-wide,France,Mines ParisTech
+U-wide,France,Sciences Po
+U-wide,France,Télécom Paris
+U-wide,France,University Grenoble Alpes
+U-wide,France,University of Technology of Compiègne
+U-wide,France,University of Technology of Troyes
+U-wide,Germany,Free University of Berlin
+U-wide,Germany,Hamburg University of Technology (TUHH)
+U-wide,Germany,Humboldt University of Berlin
+U-wide,Germany,Karlsruhe Institute of Technology
+U-wide,Germany,LMU Munich
+U-wide,Germany,RWTH Aachen University
+U-wide,Germany,Technical University of Darmstadt
+U-wide,Germany,Technical University of Munich
+U-wide,Germany,Ulm University
+U-wide,Germany,University of Bonn
+U-wide,Germany,University of Freiburg
+U-wide,Germany,University of Heidelberg
+U-wide,Germany,University of Hohenheim
+U-wide,Germany,University of Konstanz
+U-wide,Germany,University of Mannheim
+U-wide,Germany,University of Stuttgart
+U-wide,Germany,University of Tübingen
+U-wide,Hong Kong,Chinese University of Hong Kong
+U-wide,Hong Kong,City University of Hong Kong
+U-wide,Hong Kong,Hong Kong Polytechnic University
+U-wide,Hong Kong,University of Hong Kong
+U-wide,Hungary,Budapest University of Technology and Economics
+U-wide,Iceland,University of Iceland
+U-wide,Ireland,Trinity College Dublin
+U-wide,Ireland,University College Cork
+U-wide,Ireland,University College Dublin
+U-wide,Italy,University of Bologna
+U-wide,Japan,Institute of Science Tokyo
+U-wide,Japan,Keio University
+U-wide,Japan,Kyoto University
+U-wide,Japan,Nagoya University
+U-wide,Japan,Osaka University
+U-wide,Japan,Tohoku University
+U-wide,Japan,University of Tokyo
+U-wide,Japan,Waseda University
+U-wide,Lithuania,Vilnius University
+U-wide,Mexico,Monterrey Institute of Technology and Higher Education
+U-wide,Netherlands,Delft University of Technology
+U-wide,Netherlands,Eindhoven University of Technology
+U-wide,Netherlands,University of Amsterdam
+U-wide,Netherlands,Utrecht University
+U-wide,New Zealand,University of Auckland
+U-wide,New Zealand,University of Canterbury
+U-wide,New Zealand,University of Otago
+U-wide,New Zealand,Victoria University of Wellington
+U-wide,Norway,Norwegian University of Science and Technology
+U-wide,Norway,University of Oslo
+U-wide,Poland,Cracow University of Technology
+U-wide,Poland,Jagiellonian University
+U-wide,Poland,Warsaw University of Technology
+U-wide,Singapore,Nanyang Technological University
+U-wide,Singapore,Singapore Institute of Technology
+U-wide,Singapore,Singapore Management University
+U-wide,Singapore,Singapore University of Social Sciences
+U-wide,Singapore,Singapore University of Technology and Design
+U-wide,South Korea,Korea Advanced Institute of Science and Technology
+U-wide,South Korea,Korea University
+U-wide,South Korea,Pohang University of Science and Technology
+U-wide,South Korea,Seoul National University
+U-wide,South Korea,Yonsei University
+U-wide,Spain,Autonomous University of Barcelona 
+U-wide,Spain,Autonomous University of Madrid
+U-wide,Sweden,Chalmers University of Technology
+U-wide,Sweden,KTH Royal Institute of Technology
+U-wide,Sweden,Lund University
+U-wide,Sweden,Stockholm University
+U-wide,Sweden,University of Gothenburg
+U-wide,Sweden,Uppsala University
+U-wide,Switzerland,EPFL – Swiss Federal Institute of Technology Lausanne
+U-wide,Switzerland,ETH Zurich – Swiss Federal Institute of Technology Zurich
+U-wide,Switzerland,University of Geneva
+U-wide,Switzerland,University of Lausanne
+U-wide,Switzerland,University of Zurich
+U-wide,Taiwan,National Cheng Kung University
+U-wide,Taiwan,National Taiwan University
+U-wide,Taiwan,National Tsing Hua University
+U-wide,Taiwan,National Yang Ming Chiao Tung University
+U-wide,Thailand,Chulalongkorn University
+U-wide,Thailand,Mahidol University
+U-wide,Turkiye,Bilkent University
+U-wide,Turkiye,Sabanci University
+U-wide,USA,Arizona State University
+U-wide,USA,Boston College
+U-wide,USA,Boston University
+U-wide,USA,Brandeis University
+U-wide,USA,Carleton College
+U-wide,USA,Carnegie Mellon University
+U-wide,USA,Case Western Reserve University
+U-wide,USA,Clarkson University
+U-wide,USA,College of William & Mary
+U-wide,USA,Cornell University
+U-wide,USA,Emory University
+U-wide,USA,George Washington University 
+U-wide,USA,Georgetown University
+U-wide,USA,Georgia Institute of Technology
+U-wide,USA,Northwestern University (quarter exchange)
+U-wide,USA,Pennsylvania State University
+U-wide,USA,Princeton University
+U-wide,USA,Purdue University
+U-wide,USA,Rice University
+U-wide,USA,Texas A&M University
+U-wide,USA,Tulane University
+U-wide,USA,University of Alaska Fairbanks
+U-wide,USA,University of Arizona
+U-wide,USA,"University of California, Berkeley & Merced (semester exchange)"
+U-wide,USA,"University of California, except Berkeley & Merced (quarter exchange)"
+U-wide,USA,University of Colorado Boulder 
+U-wide,USA,University of Connecticut
+U-wide,USA,University of Florida
+U-wide,USA,University of Georgia
+U-wide,USA,University of Hawaii at Manoa
+U-wide,USA,University of Illinois at Urbana Champaign
+U-wide,USA,University of Maryland
+U-wide,USA,University of Miami
+U-wide,USA,University of Michigan
+U-wide,USA,University of North Carolina at Chapel Hill
+U-wide,USA,University of Notre Dame
+U-wide,USA,University of Oregon (quarter exchange)
+U-wide,USA,University of Pennsylvania
+U-wide,USA,University of Pittsburgh
+U-wide,USA,University of Southern California - Viterbi School of Engineering
+U-wide,USA,University of Texas at Austin
+U-wide,USA,University of Virginia
+U-wide,USA,"University of Washington, Seattle (quarter exchange)"
+U-wide,USA,University of Wisconsin-Madison
+U-wide,United Kingdom,Durham University
+U-wide,United Kingdom,Imperial College London
+U-wide,United Kingdom,King's College London
+U-wide,United Kingdom,London School of Economics
+U-wide,United Kingdom,University College London
+U-wide,United Kingdom,University of Bath
+U-wide,United Kingdom,University of Birmingham
+U-wide,United Kingdom,University of Bristol
+U-wide,United Kingdom,University of Edinburgh
+U-wide,United Kingdom,University of Glasgow
+U-wide,United Kingdom,University of Leeds
+U-wide,United Kingdom,University of Liverpool
+U-wide,United Kingdom,University of Manchester
+U-wide,United Kingdom,University of Newcastle upon Tyne
+U-wide,United Kingdom,University of Nottingham
+U-wide,United Kingdom,University of Sheffield
+U-wide,United Kingdom,University of St Andrews
+U-wide,United Kingdom,University of Warwick
+U-wide,United Kingdom,University of York
+U-wide/ Faculty,Country,University Name

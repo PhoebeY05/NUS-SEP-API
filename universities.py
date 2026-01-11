@@ -1,11 +1,12 @@
 from openpyxl import load_workbook
 import pandas as pd
 import os
+import re
+import unicodedata
 
 # ========= CONFIG =========
 EXCEL_PATH = "SEP-Credit-Transfer-Calculator.xlsx"
 OUTPUT_DIR = "data"
-OUTPUT_PATH = os.path.join(OUTPUT_DIR, "universities.csv")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -63,10 +64,47 @@ universities = (
     .sort_values(["region", "country", "university"])
 )
 
-universities_path = os.path.join(OUTPUT_DIR, "universities_by_country.csv")
+universities_path = os.path.join(OUTPUT_DIR, "universities.csv")
 universities.to_csv(universities_path, index=False)
 
 print(f"✔ Exported university list → {universities_path}")
+
+# ========= STEP 5.5: MAP ORGANISATION IDs =========
+def _normalize_text(s: str) -> str:
+    if not isinstance(s, str):
+        s = str(s)
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = s.lower().strip()
+    s = re.sub(r"[\-\u2013\u2014]", " ", s)  # hyphens to space
+    s = re.sub(r"&", " and ", s)
+    s = re.sub(r"[^a-z0-9 ]", "", s)  # drop punctuation
+    s = re.sub(r"\s+", " ", s)
+    # common abbreviation normalizations
+    s = s.replace("univ", "university").replace(" uni ", " university ")
+    s = s.replace("inst", "institute").replace(" sch ", " school ")
+    return s.strip()
+
+try:
+    org_path = os.path.join(OUTPUT_DIR, "organisations.csv")
+    if os.path.exists(org_path):
+        org_df = pd.read_csv(org_path)
+        if {"id", "name"}.issubset(org_df.columns):
+            org_df["_key"] = org_df["name"].astype(str).map(_normalize_text)
+            uni_df = universities.copy()
+            uni_df["_key"] = uni_df["university"].astype(str).map(_normalize_text)
+            id_map = dict(zip(org_df["_key"], org_df["id"]))
+            uni_df["id"] = uni_df["_key"].map(id_map)
+            uni_df = uni_df.drop(columns=["_key"])  # cleanup temp key
+            # Write back with 'id' column appended
+            uni_df.to_csv(universities_path, index=False)
+            print(f"✔ Mapped organisation IDs → {universities_path}")
+        else:
+            print("ℹ organisations.csv missing 'id'/'name' columns; skipping ID map")
+    else:
+        print("ℹ organisations.csv not found; skipping ID map")
+except Exception as e:
+    print(f"⚠ Failed to map organisation IDs: {e}")
 
 # ========= STEP 6: OPTIONAL DERIVED DATASETS =========
 
@@ -94,39 +132,11 @@ def get_universities(faculty: str):
         .tolist()
     )
 
-
-# ========= STEP 8: COMBINE DATA =========
-# Load both CSVs
-universities = pd.read_csv(os.path.join(OUTPUT_DIR, "universities_by_country.csv"))
-universities_by_faculty = pd.read_csv(
-    os.path.join(OUTPUT_DIR, "universities_by_faculty.csv")
-)
-
-# Merge on country + university
-combined = universities_by_faculty.merge(
-    universities,
-    on=["country", "university"],
-    how="left"
-)
-
-# Reorder columns nicely
-combined = combined[["region", "country", "faculty", "university"]]
-
-# Sort for readability
-combined = combined.sort_values(
-    ["region", "country", "faculty", "university"]
-)
-
-# Save combined CSV
-combined.to_csv(OUTPUT_PATH, index=False)
-
-print(f"✔ Combined dataset saved → {OUTPUT_PATH}")
-
-# ======== STEP 9: CLEANUP =========
+# ======== STEP 8: CLEANUP =========
 # Files to DELETE
 DELETE_FILES = {
-    "universities_by_country.csv",
-    "universities_by_faculty.csv",
+    # "universities_by_country.csv",
+    # "universities_by_faculty.csv",
     "Credit_Scores.csv",
     "List.csv"
 }
