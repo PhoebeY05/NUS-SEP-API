@@ -12,9 +12,33 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-1. Ensure CSVs exist under `data/` (e.g., run your scraping scripts to produce `faculties.csv`, `organisations.csv`, and optionally `data/mappings/master_partner_mappings.csv`).
+2. Download or place the SEP Credit Transfer Calculator Excel file:
 
-2. Start the server:
+```bash
+# Place the Excel at the repo root with this exact name
+# If you need the file, obtain it from your official source
+# and save it locally as below
+mv "/path/to/your/SEP-Credit-Transfer-Calculator.xlsx" ./SEP-Credit-Transfer-Calculator.xlsx
+```
+
+3. Generate CSVs under `data/`:
+
+```bash
+# Build base CSVs (faculties, organisations, universities)
+python universities.py
+
+# Optional: run only the post-processing (Step 8) on existing CSVs
+python test.py --fuzzy
+```
+
+This produces at minimum:
+
+- data/faculties.csv
+- data/organisations.csv
+- data/universities.csv
+- data/mappings/master_partner_mappings.csv
+
+4. Start the server:
 
 ```bash
 python main.py
@@ -33,6 +57,18 @@ The server runs on `http://localhost:8000`.
 - GET `/mappings.csv` — streams `data/mappings/master_partner_mappings.csv` if present; otherwise merges all CSVs in `data/mappings/`
   - Query: `faculty_id`, `university_id`, `faculty`, `university`
 
+JSON variants:
+
+- GET `/faculties` — returns JSON records (supports `limit`, `offset`)
+- GET `/organisations` — JSON with same filters as the CSV endpoint plus `limit`, `offset`
+- GET `/universities` — JSON with filters `country`, `region`, `name`, `contains`, plus `limit`, `offset`
+- GET `/mappings` — JSON with same filters as the CSV endpoint plus `limit`, `offset`
+
+Unique university names:
+
+- GET `/university-names.csv` — one-column CSV (`name`) of unique universities
+- GET `/university-names` — JSON records with a single `name` field (supports `contains`, `limit`, `offset`)
+
 ## Examples
 
 - Faculties CSV:
@@ -41,11 +77,18 @@ The server runs on `http://localhost:8000`.
   - `http://localhost:8000/organisations.csv?org=SCHL`
 - Universities containing "Tokyo":
   - `http://localhost:8000/universities.csv?contains=Tokyo`
+- Unique university names containing "Tech":
+  - `http://localhost:8000/university-names?contains=Tech&limit=50`
 - Mappings filtered by a faculty ID:
   - `http://localhost:8000/mappings.csv?faculty_id=SCI`
 
 ## Notes
 
-- Endpoints stream CSV with `Content-Type: text/csv` and `Content-Disposition` attachment headers.
+- CSV endpoints stream with `Content-Type: text/csv` and `Content-Disposition` attachment headers.
 - If a source CSV is missing, the endpoint returns 404.
 - The server uses pandas for filtering; large files may benefit from additional indexing or chunked reading if needed.
+
+Data preparation notes:
+- `faculties.py` and `organisations.py` scrapes Edurec to obtain a list of all faculties and organisations whose id start with E
+- `universities.py` reads `SEP-Credit-Transfer-Calculator.xlsx` and writes cleaned CSVs to `data/`.
+- `mappings.py` tries all possible combinations of faculties and universities to get a master list of all mappings

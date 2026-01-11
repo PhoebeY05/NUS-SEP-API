@@ -1,6 +1,5 @@
 import os
 import re
-import sys
 import unicodedata
 
 import pandas as pd
@@ -93,6 +92,7 @@ def _interactive_fuzzy_fill_ids(uni_df: pd.DataFrame, org_df: pd.DataFrame, thre
     - Shows top candidates by difflib similarity on normalized names.
     - Accept by entering option number; 'n' for next page; 's' skip; 'q' quit;
       or 'id:<VALUE>' to set an ID manually.
+    - Can search in organisations.csv to manually set ID
     """
     import difflib
 
