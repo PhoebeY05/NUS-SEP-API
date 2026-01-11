@@ -1,328 +1,307 @@
-region,country,university
-Americas,Brazil,FGV EAESP - Fundação Getulio Vargas São Paulo School of Business Administration
-Americas,Brazil,University of Sao Paulo
-Americas,Canada,Concordia University
-Americas,Canada,Dalhousie University 
-Americas,Canada,HEC Montréal
-Americas,Canada,McGill University
-Americas,Canada,McMaster University
-Americas,Canada,Queen's University Smith School of Business
-Americas,Canada,Queen’s University at Kingston
-Americas,Canada,Simon Fraser University
-Americas,Canada,University of Alberta
-Americas,Canada,University of British Columbia 
-Americas,Canada,University of Calgary
-Americas,Canada,University of Guelph
-Americas,Canada,University of Ottawa
-Americas,Canada,University of Toronto
-Americas,Canada,University of Victoria
-Americas,Canada,University of Waterloo
-Americas,Canada,Western University
-Americas,Canada,Western University Ivey Business School
-Americas,Canada,York University
-Americas,Canada,York University Schulich School of Business
-Americas,Mexico,ITAM – Autonomous Technological Institute of Mexico
-Americas,Mexico,Monterrey Institute of Technology and Higher Education
-Americas,USA,Amherst College
-Americas,USA,Arizona State University
-Americas,USA,Boston College
-Americas,USA,Boston University
-Americas,USA,Brandeis University
-Americas,USA,Carleton College
-Americas,USA,Carnegie Mellon University
-Americas,USA,Case Western Reserve University
-Americas,USA,Clarkson University
-Americas,USA,Colgate University
-Americas,USA,College of William & Mary
-Americas,USA,Cooper Union for the Advancement of Science and Art
-Americas,USA,Cornell University
-Americas,USA,Emory University
-Americas,USA,Franklin W. Olin College of Engineering
-Americas,USA,George Washington University 
-Americas,USA,Georgetown University
-Americas,USA,Georgia Institute of Technology
-Americas,USA,Iowa State University
-Americas,USA,John Hopkins University
-Americas,USA,Michigan State University
-Americas,USA,Northwestern University (quarter exchange)
-Americas,USA,Ohio State University
-Americas,USA,Pennsylvania State University
-Americas,USA,Princeton University
-Americas,USA,Purdue University
-Americas,USA,Rice University
-Americas,USA,Smith College
-Americas,USA,Texas A&M University
-Americas,USA,Tulane University
-Americas,USA,Tulane University School of Business
-Americas,USA,University of Alaska Fairbanks
-Americas,USA,University of Arizona
-Americas,USA,"University of California, Berkeley & Merced (semester exchange)"
-Americas,USA,"University of California, except Berkeley & Merced (quarter exchange)"
-Americas,USA,University of Colorado Boulder 
-Americas,USA,University of Connecticut
-Americas,USA,University of Delaware
-Americas,USA,University of Florida
-Americas,USA,University of Georgia
-Americas,USA,University of Hawaii at Manoa
-Americas,USA,University of Illinois at Urbana Champaign
-Americas,USA,University of Kansas
-Americas,USA,University of Maryland
-Americas,USA,University of Miami
-Americas,USA,University of Michigan
-Americas,USA,University of Michigan Ross School of Business
-Americas,USA,University of Minnesota
-Americas,USA,University of North Carolina at Chapel Hill
-Americas,USA,University of North Carolina at Chapel Hill Kenan-Flagler Business School
-Americas,USA,University of Notre Dame
-Americas,USA,University of Oregon (quarter exchange)
-Americas,USA,University of Pennsylvania
-Americas,USA,University of Pittsburgh
-Americas,USA,University of Southern California - Viterbi School of Engineering
-Americas,USA,University of Texas at Austin
-Americas,USA,"University of Texas at Austin, McCombs School of Business"
-Americas,USA,University of Virginia
-Americas,USA,"University of Washington, Seattle (quarter exchange)"
-Americas,USA,University of Wisconsin-Madison
-Americas,USA,Vanderbilt University
-Americas,USA,Vassar College
-Americas,USA,Wellesley College
-Asia & Australasia,Australia,Adelaide University
-Asia & Australasia,Australia,Australian National University
-Asia & Australasia,Australia,La Trobe University
-Asia & Australasia,Australia,Monash University
-Asia & Australasia,Australia,Queensland University of Technology
-Asia & Australasia,Australia,University of Melbourne
-Asia & Australasia,Australia,University of New South Wales
-Asia & Australasia,Australia,University of Newcastle
-Asia & Australasia,Australia,University of Queensland
-Asia & Australasia,Australia,University of Sydney
-Asia & Australasia,Australia,University of Western Australia
-Asia & Australasia,China,"Chinese University of Hong Kong, Shenzhen"
-Asia & Australasia,China,Chongqing University
-Asia & Australasia,China,Fudan University
-Asia & Australasia,China,Nanjing University
-Asia & Australasia,China,Peking University
-Asia & Australasia,China,Peking University Guanghua School of Management
-Asia & Australasia,China,Shanghai Jiao Tong University
-Asia & Australasia,China,Southeast University
-Asia & Australasia,China,Tianjin University
-Asia & Australasia,China,Tongji University
-Asia & Australasia,China,Tsinghua University
-Asia & Australasia,China,Tsinghua University School of Economics and Management
-Asia & Australasia,China,Xiamen University
-Asia & Australasia,China,Zhejiang University
-Asia & Australasia,China,"Zhejiang University, International Business School"
-Asia & Australasia,Hong Kong,Chinese University of Hong Kong
-Asia & Australasia,Hong Kong,City University of Hong Kong
-Asia & Australasia,Hong Kong,City University of Hong Kong College of Business
-Asia & Australasia,Hong Kong,Hong Kong Polytechnic University
-Asia & Australasia,Hong Kong,Hong Kong University of Science and Technology
-Asia & Australasia,Hong Kong,Hong Kong University of Science and Technology School of Business and Management
-Asia & Australasia,Hong Kong,Hong Kong University of Science and Technology School of Engineering
-Asia & Australasia,Hong Kong,University of Hong Kong
-Asia & Australasia,Hong Kong,University of Hong Kong Business School
-Asia & Australasia,India,"Indian Institute of Technology, Bombay"
-Asia & Australasia,Indonesia,University of Gadjah Mada
-Asia & Australasia,Japan,Akita International University
-Asia & Australasia,Japan,Institute of Science Tokyo
-Asia & Australasia,Japan,International Christian University
-Asia & Australasia,Japan,Keio University
-Asia & Australasia,Japan,Kwansei Gakuin University
-Asia & Australasia,Japan,Kyoto Institute of Technology
-Asia & Australasia,Japan,Kyoto University
-Asia & Australasia,Japan,Meiji University
-Asia & Australasia,Japan,Meiji University (School of Global Japanese Studies)
-Asia & Australasia,Japan,Nagoya University
-Asia & Australasia,Japan,Osaka University
-Asia & Australasia,Japan,Rikkyo University
-Asia & Australasia,Japan,Ritsumeikan University
-Asia & Australasia,Japan,Tohoku University
-Asia & Australasia,Japan,Tokyo University of Foreign Studies
-Asia & Australasia,Japan,University of Tokyo
-Asia & Australasia,Japan,University of Tokyo (College of Arts and Sciences)
-Asia & Australasia,Japan,Waseda University
-Asia & Australasia,New Zealand,University of Auckland
-Asia & Australasia,New Zealand,University of Canterbury
-Asia & Australasia,New Zealand,University of Otago
-Asia & Australasia,New Zealand,Victoria University of Wellington
-Asia & Australasia,South Korea,Ewha Womans University
-Asia & Australasia,South Korea,Hankuk University of Foreign Studies
-Asia & Australasia,South Korea,Hanyang University
-Asia & Australasia,South Korea,Korea Advanced Institute of Science and Technology
-Asia & Australasia,South Korea,Korea University
-Asia & Australasia,South Korea,Korea University Business School
-Asia & Australasia,South Korea,Pohang University of Science and Technology
-Asia & Australasia,South Korea,Seoul National University
-Asia & Australasia,South Korea,Seoul National University Business School
-Asia & Australasia,South Korea,University of Seoul
-Asia & Australasia,South Korea,Yonsei University
-Asia & Australasia,Taiwan,Chang Gung University
-Asia & Australasia,Taiwan,National Cheng Kung University
-Asia & Australasia,Taiwan,National Chengchi University
-Asia & Australasia,Taiwan,National Chengchi University College of Commerce
-Asia & Australasia,Taiwan,National Taiwan University
-Asia & Australasia,Taiwan,National Taiwan University College of Management
-Asia & Australasia,Taiwan,National Taiwan University of Science and Technology
-Asia & Australasia,Taiwan,National Tsing Hua University
-Asia & Australasia,Taiwan,National Yang Ming Chiao Tung University
-Asia & Australasia,Taiwan,Tunghai University
-Asia & Australasia,Thailand,Chulalongkorn University
-Asia & Australasia,Thailand,Mahidol University
-Europe,Austria,Management Center Innsbruck Internationale Hochschule GmbH
-Europe,Austria,University of Innsbruck
-Europe,Austria,Vienna University of Economics and Business
-Europe,Belgium,"Catholic University of Louvain, Louvain School of Management"
-Europe,Belgium,KU Leuven
-Europe,Belgium,University of Antwerp
-Europe,Belgium,"University of Brussels, Solvay Business School"
-Europe,Croatia,University of Zagreb
-Europe,Czech Republic,Czech Technical University in Prague
-Europe,Denmark,Aalborg University
-Europe,Denmark,Aarhus University
-Europe,Denmark,Copenhagen Business School
-Europe,Denmark,Technical University of Denmark
-Europe,Denmark,University of Copenhagen
-Europe,Denmark,University of Southern Denmark
-Europe,Estonia,Tallinn University of Technology
-Europe,Finland,Aalto University
-Europe,Finland,"Aalto University, Helsinki"
-Europe,Finland,"Aalto University, Mikkeli"
-Europe,Finland,Tampere University
-Europe,Finland,University of Helsinki
-Europe,Finland,University of Oulu
-Europe,France,CentraleSupélec
-Europe,France,ENSCI Les Ateliers - Ecole National Superieure de Creation Industrielle
-Europe,France,ESSEC Business School
-Europe,France,Ecole Speciale d'Architecture
-Europe,France,HEC Paris
-Europe,France,INSA Lyon – National Institute of Applied Sciences of Lyon
-Europe,France,ISAE-Supaero
-Europe,France,Institut Superieur de Design
-Europe,France,Mines ParisTech
-Europe,France,Sciences Po
-Europe,France,Sciences Po Bordeaux
-Europe,France,Strate School of Design
-Europe,France,Télécom Paris
-Europe,France,University Grenoble Alpes
-Europe,France,University of Technology of Compiègne
-Europe,France,University of Technology of Troyes
-Europe,Germany,Esslingen University of Applied Sciences
-Europe,Germany,European Business School
-Europe,Germany,Free University of Berlin
-Europe,Germany,Georg-August-University
-Europe,Germany,Hamburg University of Technology (TUHH)
-Europe,Germany,Humboldt University of Berlin
-Europe,Germany,Karlsruhe Institute of Technology
-Europe,Germany,LMU Munich
-Europe,Germany,Mannheim Business School
-Europe,Germany,RPTU Kaiserslautern-Landau
-Europe,Germany,RWTH Aachen University
-Europe,Germany,Technical University of Berlin
-Europe,Germany,Technical University of Darmstadt
-Europe,Germany,Technical University of Munich
-Europe,Germany,Ulm University
-Europe,Germany,University of Bonn
-Europe,Germany,University of Cologne
-Europe,Germany,University of Freiburg
-Europe,Germany,University of Heidelberg
-Europe,Germany,University of Hohenheim
-Europe,Germany,University of Konstanz
-Europe,Germany,University of Mannheim
-Europe,Germany,University of Stuttgart
-Europe,Germany,University of Tübingen
-Europe,Germany,University of Wuppertal
-Europe,Germany,WHU-Otto Beisheim School of Management
-Europe,Hungary,Budapest University of Technology and Economics
-Europe,Hungary,Corvinus University of Budapest
-Europe,Iceland,University of Iceland
-Europe,Ireland,Trinity College Dublin
-Europe,Ireland,University College Cork
-Europe,Ireland,University College Dublin
-Europe,Italy,Bocconi University
-Europe,Italy,Catholic University of the Sacred Heart
-Europe,Italy,Polytechnic University of Milan (Politecnico di Milano)
-Europe,Italy,Polytechnic University of Turin (Politecnico di Torino)
-Europe,Italy,University of Bologna
-Europe,Italy,University of Commerce 'Luigi Bocconi' Milan
-Europe,Lithuania,Vilnius University
-Europe,Netherlands,Delft University of Technology
-Europe,Netherlands,Eindhoven University of Technology
-Europe,Netherlands,"Erasmus School of History, Culture and Communication"
-Europe,Netherlands,Erasmus School of Social and Behavioural Sciences
-Europe,Netherlands,Leiden University
-Europe,Netherlands,Leiden University (Faculty of Science)
-Europe,Netherlands,Leiden University Medical Centre
-Europe,Netherlands,Maastricht University
-Europe,Netherlands,Radbound University Nijmegen
-Europe,Netherlands,"Rotterdam School of Management, Erasmus University"
-Europe,Netherlands,Tilburg University
-Europe,Netherlands,University of Amsterdam
-Europe,Netherlands,Utrecht University
-Europe,Norway,BI Norwegian Business School
-Europe,Norway,Norwegian School of Economics
-Europe,Norway,Norwegian University of Science and Technology
-Europe,Norway,University of Oslo
-Europe,Poland,Cracow University of Technology
-Europe,Poland,Jagiellonian University
-Europe,Poland,Warsaw School of Economics
-Europe,Poland,Warsaw University of Technology
-Europe,Portugal,"Catholic University of Portugal, Católica Lisbon School of Business and Economics"
-Europe,Portugal,Nova School of Business and Economics
-Europe,Slovenia,University of Ljubljana
-Europe,Spain,Autonomous University of Barcelona 
-Europe,Spain,Autonomous University of Madrid
-Europe,Spain,ESADE Business School
-Europe,Spain,IE Business School
-Europe,Spain,UIC Catalunya
-Europe,Spain,University of Navarra
-Europe,Sweden,Blekinge Institute of Technology
-Europe,Sweden,Chalmers University of Technology
-Europe,Sweden,KTH Royal Institute of Technology
-Europe,Sweden,Karolinska Institute
-Europe,Sweden,Linkoping University
-Europe,Sweden,Lund University
-Europe,Sweden,Stockholm School of Economics
-Europe,Sweden,Stockholm University
-Europe,Sweden,University of Gothenburg
-Europe,Sweden,Uppsala University
-Europe,Switzerland,ECAL – University of Art and Design Lausanne
-Europe,Switzerland,EPFL – Swiss Federal Institute of Technology Lausanne
-Europe,Switzerland,ETH Zurich – Swiss Federal Institute of Technology Zurich
-Europe,Switzerland,University of Geneva
-Europe,Switzerland,University of Lausanne
-Europe,Switzerland,University of St Gallen
-Europe,Switzerland,University of Zurich
-Europe,Turkiye,Bilkent University
-Europe,Turkiye,Sabanci University
-Europe,United Kingdom,City University of London
-Europe,United Kingdom,Durham University
-Europe,United Kingdom,Imperial College London
-Europe,United Kingdom,King's College London
-Europe,United Kingdom,London School of Economics
-Europe,United Kingdom,Loughborough University
-Europe,United Kingdom,University College London
-Europe,United Kingdom,University of Aberdeen
-Europe,United Kingdom,University of Bath
-Europe,United Kingdom,University of Birmingham
-Europe,United Kingdom,University of Bristol
-Europe,United Kingdom,University of Dundee
-Europe,United Kingdom,University of Edinburgh
-Europe,United Kingdom,University of Glasgow
-Europe,United Kingdom,University of Leeds
-Europe,United Kingdom,University of Liverpool
-Europe,United Kingdom,University of Manchester
-Europe,United Kingdom,University of Newcastle upon Tyne
-Europe,United Kingdom,University of Nottingham
-Europe,United Kingdom,University of Sheffield
-Europe,United Kingdom,University of Southamptom
-Europe,United Kingdom,University of St Andrews
-Europe,United Kingdom,University of Strathclyde
-Europe,United Kingdom,University of Warwick
-Europe,United Kingdom,University of York
-Middle East & Africa,South Africa,Stellenbosch University
-Region,Country,University Name
-Singapore,Singapore,Nanyang Technological University
-Singapore,Singapore,Singapore Institute of Technology
-Singapore,Singapore,Singapore Management University
-Singapore,Singapore,Singapore University of Social Sciences
-Singapore,Singapore,Singapore University of Technology and Design
+region,country,university,id
+Americas,Brazil,FGV-EAESP Sao Paulo,E0000004184
+Americas,Brazil,University Of Sao Paulo,E0000002681
+Americas,Canada,Concordia University,E0000000700
+Americas,Canada,Dalhousie University,E0000000697
+Americas,Canada,HEC Montreal,E0000001734
+Americas,Canada,McGill University,E0000000694
+Americas,Canada,McMaster University,E0000000693
+Americas,Canada,Queen's University at Kingston,E0000000687
+Americas,Canada,Simon Fraser University,E0000000685
+Americas,Canada,University of Alberta,E0000000702
+Americas,Canada,The Uni of British Columbia,E0000000701
+Americas,Canada,University of Calgary,E0000000699
+Americas,Canada,University of Guelph,E0000001735
+Americas,Canada,University of Ottawa,E0000000689
+Americas,Canada,University of Toronto,E0000000684
+Americas,Canada,University of Victoria,E0000000683
+Americas,Canada,University of Waterloo,E0000000680
+Americas,Canada,Western University,E0000003732
+Americas,Canada,York University,E0000000674
+Americas,Mexico,ITAM – Autonomous Technological Institute of Mexico,E0000002340
+Americas,Mexico,Tecnologio De Monterrey,E0000001896
+Americas,USA,Amherst College,E0000001451
+Americas,USA,Arizona State University,E0000001449
+Americas,USA,Boston College,E0000001300
+Americas,USA,Boston University,E0000001446
+Americas,USA,Brandeis University,E0000001445
+Americas,USA,Carleton College,E0000001885
+Americas,USA,Carnegie Mellon University,E0000001428
+Americas,USA,Case Western Reserve Uni,E0000001427
+Americas,USA,Clarkson University,E0000001893
+Americas,USA,Colgate University,E0000003887
+Americas,USA,William & Mary,E0000001424
+Americas,USA,Cooper Union For the Advc of S,E0000004142
+Americas,USA,Cornell University,E0000001440
+Americas,USA,Emory University,E0000001416
+Americas,USA,Franklin W Olin College of Eng,E0000002443
+Americas,USA,The George Washington Uni,E0000001413
+Americas,USA,Georgetown University,E0000001411
+Americas,USA,Georgia Inst of Technology,E0000001412
+Americas,USA,Iowa State University,E0000001319
+Americas,USA,Johns Hopkins University,E0000001398
+Americas,USA,Michigan State University,E0000001385
+Americas,USA,Northwestern University,E0000001379
+Americas,USA,The Ohio State University,E0000001373
+Americas,USA,The Pennsylvania State Uni,E0000001367
+Americas,USA,Princeton University,E0000002667
+Americas,USA,Purdue University,E0000001364
+Americas,USA,Rice University,E0000001363
+Americas,USA,Smith College,E0000001351
+Americas,USA,Texas A&M University,E0000001343
+Americas,USA,Tulane University,E0000001773
+Americas,USA,University of Alaska Fairbanks,E0000003694
+Americas,USA,The University of Arizona,E0000001450
+Americas,USA,University of California,E0000001439
+Americas,USA,University of Colorado Boulder,E0000003204
+Americas,USA,University of Connecticut,E0000001421
+Americas,USA,University of Delaware,E0000002381
+Americas,USA,University of Florida,E0000001414
+Americas,USA,University of Georgia,E0000001409
+Americas,USA,University of Hawaii at Manoa,E0000001407
+Americas,USA,Uni Illinois Urbana-Champaign,E0000001402
+Americas,USA,University of Kansas,E0000001397
+Americas,USA,University of Maryland,E0000001390
+Americas,USA,University of Miami,E0000001388
+Americas,USA,University of Michigan,E0000001386
+Americas,USA,University of Minnesota,E0000001384
+Americas,USA,Uni N Carolina at Chapel Hill,E0000001382
+Americas,USA,University of Notre Dame,E0000001380
+Americas,USA,University of Oregon,E0000001369
+Americas,USA,University of Pennsylvania,E0000001368
+Americas,USA,University of Pittsburgh,E0000001366
+Americas,USA,University of South Carolina,E0000001775
+Americas,USA,The Uni of Texas at Austin,E0000001345
+Americas,USA,"University of Texas at Austin, McCombs School of Business",id=E0000001345
+Americas,USA,University of Virginia,E0000001338
+Americas,USA,University of Washington,E0000001335
+Americas,USA,Uni of Wisconsin-Madison,E0000001331
+Americas,USA,Vanderbilt University,E0000001339
+Americas,USA,Vassar College,E0000002069
+Americas,USA,Wellesley College,E0000002070
+Asia & Australasia,Australia,Adelaide University,E0000000636
+Asia & Australasia,Australia,The Australian National Uni,E0000000637
+Asia & Australasia,Australia,La Trobe University,E0000002680
+Asia & Australasia,Australia,Monash University,E0000000628
+Asia & Australasia,Australia,"Queensland Uni of Tech, Aust",E0000000622
+Asia & Australasia,Australia,The University of Melbourne,E0000000629
+Asia & Australasia,Australia,University of New South Wales,E0000000626
+Asia & Australasia,Australia,University of Newcastle,E0000000625
+Asia & Australasia,Australia,The University of Queensland,E0000000623
+Asia & Australasia,Australia,The University of Sydney,E0000000620
+Asia & Australasia,Australia,The Uni of Western Australia,E0000000618
+Asia & Australasia,China,The Chinese Uni of HKG (Shenz),E0000004419
+Asia & Australasia,China,Chongqing University,E0000001014
+Asia & Australasia,China,Fudan University,E0000001048
+Asia & Australasia,China,Nanjing University,E0000001037
+Asia & Australasia,China,Peking University,E0000001036
+Asia & Australasia,China,Shanghai Jiao Tong University,E0000001042
+Asia & Australasia,China,Southeast University,E0000004116
+Asia & Australasia,China,Tianjin University,E0000001018
+Asia & Australasia,China,Tongji University,E0000001012
+Asia & Australasia,China,Tsinghua University,E0000001028
+Asia & Australasia,China,Tsinghua U Sch of Econs & Mgmt,E0000004712
+Asia & Australasia,China,Xiamen University,E0000001026
+Asia & Australasia,China,Zhejiang University,E0000001017
+Asia & Australasia,Hong Kong,The Chinese Uni of Hong Kong,E0000000009
+Asia & Australasia,Hong Kong,City University of Hong Kong,E0000000006
+Asia & Australasia,Hong Kong,The Hong Kong Polytechnic Uni,E0000000004
+Asia & Australasia,Hong Kong,Hong Kong Uni of Sci & Tech,E0000000005
+Asia & Australasia,Hong Kong,The University of Hong Kong,E0000000008
+Asia & Australasia,India,Indian Institute of Technology,E0000006657
+Asia & Australasia,Indonesia,University of Gadjah Mada,E0000000267
+Asia & Australasia,Japan,Akita International University,E0000000305
+Asia & Australasia,Japan,Institute of Science Tokyo,E0000000318
+Asia & Australasia,Japan,International Christian Univ,E0000003424
+Asia & Australasia,Japan,Keio University,E0000000328
+Asia & Australasia,Japan,Kwansei Gakuin University,E0000000327
+Asia & Australasia,Japan,Kyoto Institute of Technology,E0000000309
+Asia & Australasia,Japan,Kyoto University,E0000000326
+Asia & Australasia,Japan,Meiji University,E0000002903
+Asia & Australasia,Japan,Nagoya University,E0000000325
+Asia & Australasia,Japan,Osaka University,E0000000323
+Asia & Australasia,Japan,Rikkyo University,E0000000322
+Asia & Australasia,Japan,Ritsumeikan University,E0000000307
+Asia & Australasia,Japan,Tohoku University,E0000000310
+Asia & Australasia,Japan,Tokyo Uni of Foreign Studies,E0000000320
+Asia & Australasia,Japan,The University of Tokyo,E0000000319
+Asia & Australasia,Japan,Waseda University,E0000000316
+Asia & Australasia,New Zealand,The University of Auckland,E0000000427
+Asia & Australasia,New Zealand,University of Canterbury,E0000000426
+Asia & Australasia,New Zealand,University of Otago,E0000000424
+Asia & Australasia,New Zealand,Victoria Uni of Wellington,E0000000423
+Asia & Australasia,South Korea,"Ewha Women's University,Seoul",E0000000540
+Asia & Australasia,South Korea,Hankuk Uni of Foreign Studies,E0000000547
+Asia & Australasia,South Korea,Hanyang University,E0000000532
+Asia & Australasia,South Korea,Korea Adv Inst S&T (KAIST),E0000000546
+Asia & Australasia,South Korea,Korea University,E0000000544
+Asia & Australasia,South Korea,Korea University Business Sch,E0000004715
+Asia & Australasia,South Korea,Pohang Uni of Sci & Technology,E0000001723
+Asia & Australasia,South Korea,Seoul National University,E0000000549
+Asia & Australasia,South Korea,University of Seoul,E0000001724
+Asia & Australasia,South Korea,Yonsei University,E0000000548
+Asia & Australasia,Taiwan,Chang Gung University,E0000003234
+Asia & Australasia,Taiwan,National Cheng Kung University,E0000000596
+Asia & Australasia,Taiwan,National Chengchi University,E0000000587
+Asia & Australasia,Taiwan,National Taiwan University,E0000000598
+Asia & Australasia,Taiwan,Nat Taiwan Uni of Sci & Tech,E0000000584
+Asia & Australasia,Taiwan,National Tsing Hua University,E0000000591
+Asia & Australasia,Taiwan,National Yang Ming Chiao Tung,E0000006015
+Asia & Australasia,Taiwan,Tunghai University,E0000000594
+Asia & Australasia,Thailand,Chulalongkorn University,E0000001160
+Asia & Australasia,Thailand,Mahidol University,E0000001158
+Europe,Austria,MCI - Intl Hochschul GmbH,E0000002698
+Europe,Austria,University of Innsbruck,E0000001900
+Europe,Austria,Vienna Uni of Econ & Biz,E0000000638
+Europe,Belgium,UCL Catholic Uni of Louvain,E0000000660
+Europe,Belgium,KU Leuven,E0000000662
+Europe,Belgium,University of Antwerp,E0000001732
+Europe,Belgium,Uni of Brussels Solvay Biz Sch,E0000000663
+Europe,Croatia,University of Zagreb,E0000001738
+Europe,Czech Republic,Czech Technical Uni in Prague,E0000001740
+Europe,Denmark,Aalborg University,E0000001059
+Europe,Denmark,Aarhus University,E0000001062
+Europe,Denmark,Copenhagen Business School,E0000001063
+Europe,Denmark,Technical Uni of Denmark,E0000001064
+Europe,Denmark,University of Copenhagen,E0000001060
+Europe,Denmark,University of Southern Denmark,E0000001870
+Europe,Estonia,Tallinn Uni of Technology,E0000001741
+Europe,Finland,Aalto University,E0000002487
+Europe,Finland,"Aalto University, Helsinki",E0000003892
+Europe,Finland,"Aalto University, Mikkeli",E0000003894
+Europe,Finland,Tampere University,E0000008555
+Europe,Finland,University of Helsinki,E0000001068
+Europe,Finland,University of Oulu,E0000001744
+Europe,France,CentraleSupelec,E0000003357
+Europe,France,L'Ateliers Ecole Nat Sup de CI,E0000001903
+Europe,France,ESSEC Business School,E0000002542
+Europe,France,Ecole Speciale d'Architecture,E0000001102
+Europe,France,Hautes Etudes Comc (HEC) Paris,E0000002337
+Europe,France,INSA Lyon,E0000001094
+Europe,France,ISAE-SUPAERO,E0000004265
+Europe,France,Rubika,E0000002962
+Europe,France,Mines Paris - PSL,E0000003625
+Europe,France,Sciences Po Paris,E0000002416
+Europe,France,Sciences Po Bordeaux,E0000005080
+Europe,France,Strate School of Design,E0000004045
+Europe,France,Telecom Paris,E0000001858
+Europe,France,Universite Grenoble Alpes,E0000004052
+Europe,France,Uni of Technology of Compiegne,E0000001095
+Europe,France,Uni of Technology of Troyes,E0000001748
+Europe,Germany,"Uni of Applied Sci, Esslingen",E0000001119
+Europe,Germany,European Business School,E0000001116
+Europe,Germany,Free University of Berlin,E0000001137
+Europe,Germany,Georg-August-Uni of Gottingen,E0000001129
+Europe,Germany,Hamburg Uni of Technology,E0000001113
+Europe,Germany,Humboldt University of Berlin,E0000001918
+Europe,Germany,Karlsruhe Inst of Technology,E0000001132
+Europe,Germany,Ludwig Maximilian U of Munich,E0000001757
+Europe,Germany,Mannheim Business School,E0000001890
+Europe,Germany,University of Kaiserslautern,E0000001133
+Europe,Germany,RWTH Aachen University,E0000001111
+Europe,Germany,Technical University of Berlin,E0000001920
+Europe,Germany,Technical Uni of Darmstadt,E0000001138
+Europe,Germany,Technical University of Munich,E0000006960
+Europe,Germany,Ulm University,E0000001755
+Europe,Germany,University of Bonn,E0000001140
+Europe,Germany,University of Cologne,E0000001139
+Europe,Germany,University of Freiburg,E0000001115
+Europe,Germany,Heidelberg University,E0000001136
+Europe,Germany,University of Hohenheim,E0000001135
+Europe,Germany,University of Konstanz,E0000001114
+Europe,Germany,University of Mannheim,E0000001122
+Europe,Germany,University of Stuttgart,E0000001128
+Europe,Germany,University of Tuebingen,E0000001921
+Europe,Germany,University of Wuppertal,E0000001124
+Europe,Germany,WHU-Otto Beisheim Sch of Mgmt,E0000001121
+Europe,Hungary,Budapest Uni of Tech and Econ,E0000000011
+Europe,Hungary,Corvinus Uni of Budapest,E0000001707
+Europe,Iceland,University of Iceland,E0000005382
+Europe,Ireland,Trinity College Dublin,E0000000290
+Europe,Ireland,University College Cork,E0000000286
+Europe,Ireland,University College Dublin,E0000002455
+Europe,Italy,Bocconi University,E0000006111
+Europe,Italy,Catholic Uni the Sacred Heart,E0000001709
+Europe,Italy,Politechnico di Milano,E0000000300
+Europe,Italy,Polytechnic Univ of Turin,E0000003099
+Europe,Italy,University of Bologna,E0000002025
+Europe,Italy,Uni of Com Luigi Bocconi Milan,E0000000299
+Europe,Lithuania,Vilnius University,E0000000340
+Europe,Netherlands,Delft University of Technology,E0000000420
+Europe,Netherlands,Eindhoven Uni of Technology,E0000000417
+Europe,Netherlands,Erasmus University Rotterdam,E0000000419
+Europe,Netherlands,Leiden University,E0000002466
+Europe,Netherlands,Leiden Uni Medical Ctr (LUMC),E0000001897
+Europe,Netherlands,Maastricht University,E0000000412
+Europe,Netherlands,Radboud University Nijmegen,E0000002497
+Europe,Netherlands,Rotterdam School of Management,E0000000410
+Europe,Netherlands,Tilburg University,E0000001876
+Europe,Netherlands,University of Amsterdam,E0000000421
+Europe,Netherlands,Utrecht University,E0000000416
+Europe,Norway,BI Norwegian Business School,E0000003551
+Europe,Norway,Norwegian School of Economics,E0000000444
+Europe,Norway,Norwegian Uni of Sci & Tech,E0000000443
+Europe,Norway,University of Oslo,E0000002370
+Europe,Poland,CracowUT,E0000001878
+Europe,Poland,Jagiellonian University,E0000001718
+Europe,Poland,Warsaw School of Economics,E0000000497
+Europe,Poland,Warsaw Uni of Technology,E0000000498
+Europe,Portugal,Catholic Uni of Portugal,E0000002343
+Europe,Portugal,Nova Sch of Business & Econs,E0000004711
+Europe,Slovenia,University of Ljubljana,E0000002734
+Europe,Spain,Uni Autonoma de Barcelona,E0000004274
+Europe,Spain,Autonomous Uni of Madrid,E0000001938
+Europe,Spain,ESADE Business School,E0000004475
+Europe,Spain,IE Business School,E0000003866
+Europe,Spain,UIC Barcelona,E0000007080
+Europe,Spain,University of Navarra,E0000002376
+Europe,Sweden,Blekinge Institute of Tech,E0000003399
+Europe,Sweden,Chalmers Uni of Technology,E0000000567
+Europe,Sweden,KTH-Royal Inst of Technology,E0000000571
+Europe,Sweden,Karolinska Institute,E0000000573
+Europe,Sweden,Linkoping University,E0000000568
+Europe,Sweden,Lund University,E0000000572
+Europe,Sweden,Stockholm School of Economics,E0000000565
+Europe,Sweden,Stockholm University,E0000000570
+Europe,Sweden,University of Gothenburg,E0000003696
+Europe,Sweden,Uppsala University,E0000000569
+Europe,Switzerland,Ecole CA de Lausanne (ECAL),E0000000574
+Europe,Switzerland,Swiss Federal Ins Tec Lausanne,E0000000580
+Europe,Switzerland,Swiss Federal Inst Tec Zurich,E0000000577
+Europe,Switzerland,University of Geneva,E0000001729
+Europe,Switzerland,University of Lausanne,E0000001730
+Europe,Switzerland,University of St. Gallen,E0000000576
+Europe,Switzerland,University of Zurich,E0000000579
+Europe,Turkiye,Bilkent University,E0000002064
+Europe,Turkiye,Sabanci University,E0000001165
+Europe,United Kingdom,"City, University of London",E0000001263
+Europe,United Kingdom,Durham University,E0000001260
+Europe,United Kingdom,Imperial College London,E0000001172
+Europe,United Kingdom,King's College London,E0000001200
+Europe,United Kingdom,London Sch of Econ & Pol Sci,E0000001213
+Europe,United Kingdom,Loughborough University,E0000001197
+Europe,United Kingdom,University College London,E0000001228
+Europe,United Kingdom,University of Aberdeen,E0000001275
+Europe,United Kingdom,University of Bath,E0000001272
+Europe,United Kingdom,University of Birmingham,E0000001270
+Europe,United Kingdom,University of Bristol,E0000001267
+Europe,United Kingdom,University of Dundee,E0000001261
+Europe,United Kingdom,The University of Edinburgh,E0000001258
+Europe,United Kingdom,University of Glasgow,E0000001255
+Europe,United Kingdom,University of Leeds,E0000001248
+Europe,United Kingdom,University of Liverpool,E0000001246
+Europe,United Kingdom,The University of Manchester,E0000001219
+Europe,United Kingdom,University of Caen,E0000001103
+Europe,United Kingdom,University of Nottingham,E0000001240
+Europe,United Kingdom,The University of Sheffield,E0000001233
+Europe,United Kingdom,University of Southampton,E0000001235
+Europe,United Kingdom,University of St Andrews,E0000002627
+Europe,United Kingdom,University of Strathclyde,E0000001231
+Europe,United Kingdom,University of Warwick,E0000001224
+Europe,United Kingdom,University of York,E0000001223
+Middle East & Africa,South Africa,Stellenbosch University,E0000001722
+Singapore,Singapore,NTU Singapore,E0000000513
+Singapore,Singapore,S'pore Institute of Technology,E0000002901
+Singapore,Singapore,Singapore Management Uni,E0000000511
+Singapore,Singapore,S'pore Uni of Social Sciences,E0000001881
+Singapore,Singapore,S'pore Uni of Tech and Design,E0000002628
