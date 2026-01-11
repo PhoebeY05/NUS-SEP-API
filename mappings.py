@@ -316,12 +316,10 @@ def process_combination(faculty, uni):
             df["University ID"] = uni.get("id")
             df.to_csv(csv_path, index=False)
             print(f"✅ Saved: {csv_path}")
-            page.close()
             return df
 
         except (PlaywrightTimeoutError, Exception) as e:
             print(f"⚠️ Attempt {attempt} failed for {fname} | {uni.get('name') or uni.get('id')}: {e}")
-            page.close()
             if attempt < MAX_RETRIES:
                 print(f"⏳ Retrying in {RETRY_DELAY}s...")
                 time.sleep(RETRY_DELAY)
@@ -366,8 +364,8 @@ with sync_playwright() as p:
     # Process all combinations sequentially to avoid cross-thread page/context issues
     for f in faculties:
         for u in partner_unis:
-            disp_f = f.get('id')
-            disp_u = u.get('id')
+            disp_f = f.get('name')
+            disp_u = u.get('name')
             print(f"➡️ Processing: {disp_f} | {disp_u}")
             df = process_combination(f, u)
             if df is not None:
@@ -381,5 +379,21 @@ with sync_playwright() as p:
 if all_csvs:
     pd.concat(all_csvs, ignore_index=True).to_csv(MASTER_CSV_PATH, index=False)
     print(f"✅ Master CSV created: {MASTER_CSV_PATH}")
+    # Cleanup: remove per-combination XLS/CSV files, keep only the master
+    try:
+        master_abs = os.path.abspath(MASTER_CSV_PATH)
+        for fname in os.listdir(MAPPING_DOWNLOAD_DIR):
+            fp = os.path.join(MAPPING_DOWNLOAD_DIR, fname)
+            if not os.path.isfile(fp):
+                continue
+            ext = os.path.splitext(fname)[1].lower()
+            if ext in (".xls", ".csv") and os.path.abspath(fp) != master_abs:
+                try:
+                    os.remove(fp)
+                except Exception:
+                    pass
+        print("🧹 Cleaned up per-combination XLS/CSV files")
+    except Exception as e:
+        print(f"⚠️ Cleanup failed: {e}")
 else:
     print("⚠️ No CSVs to merge")
