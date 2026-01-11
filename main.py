@@ -80,18 +80,26 @@ def get_organisations_csv(
 @app.get("/universities.csv")
 def get_universities_csv(
     contains: Optional[str] = Query(None, description="Filter rows where any text column contains this value"),
+    country: Optional[str] = Query(None, description="Filter by country (exact, case-insensitive)"),
+    region: Optional[str] = Query(None, description="Filter by region (exact, case-insensitive)"),
+    name: Optional[str] = Query(None, description="Filter by university name contains (case-insensitive)"),
 ):
-    """Convenience endpoint returning organisations filtered to SCHL (partner universities)."""
-    path = data / "organisations.csv"
+    """Return partner universities with optional filters for country, region, and name."""
+    path = data / "universities.csv"
     if not path.exists():
-        raise HTTPException(status_code=404, detail="organisations.csv not found")
+        raise HTTPException(status_code=404, detail="universities.csv not found")
     try:
         df = pd.read_csv(path)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed reading organisations.csv: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed reading universities.csv: {e}")
 
-    if "org" in df.columns:
-        df = df[df["org"].astype(str).str.upper() == "SCHL"]
+    # Apply explicit filters
+    if country and "country" in df.columns:
+        df = df[df["country"].astype(str).str.lower() == country.strip().lower()]
+    if region and "region" in df.columns:
+        df = df[df["region"].astype(str).str.lower() == region.strip().lower()]
+    if name and "name" in df.columns:
+        df = df[df["name"].astype(str).str.contains(name, case=False, na=False)]
     if contains:
         mask = pd.Series(False, index=df.index)
         for col in df.columns:
