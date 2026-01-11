@@ -20,6 +20,7 @@ os.makedirs(MAPPING_DOWNLOAD_DIR, exist_ok=True)
 MASTER_CSV_PATH = os.path.join(MAPPING_DOWNLOAD_DIR, "master_partner_mappings.csv")
 SEARCH_PAGE = None
 FACULTIES_CSV = os.path.join(DOWNLOAD_DIR, "faculties.csv")
+UNI_CSV = os.path.join(DOWNLOAD_DIR, "universities.csv")
 
 FACULTY_FIELD = "input[id^='N_EXSP_DRVD_ACAD_GROUP']"
 FACULTY_PROMPT = "a[id^='N_EXSP_DRVD_ACAD_GROUP$prompt']"
@@ -349,7 +350,10 @@ faculties = derive_items_from_csv(
 )
 print("➡️ Obtained list of faculties: " + ", ".join([(f.get('name') or f.get('id') or '') for f in faculties]))
 # Derive universities
-partner_unis = get_partner_universities()
+partner_unis = derive_items_from_csv(
+        UNI_CSV,
+        value_cols=["org", "search", "name"],
+    )
 print("➡️ Obtained list of universities: " + ", ".join([((u.get('name') or '') + (f" ({u.get('id')})" if u.get('id') else '')) for u in partner_unis]))
 print(f"Discovered {len(faculties)} faculties × {len(partner_unis)} universities")
 
