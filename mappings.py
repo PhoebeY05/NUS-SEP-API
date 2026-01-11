@@ -8,8 +8,7 @@ import pandas as pd
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
 
-from utilities import (close_modal, derive_items_from_csv,
-                       get_partner_universities,
+from utilities import (derive_items_from_csv,
                        navigate_to_search_course_mappings)
 
 EDUREC_HOME = "https://myedurec.nus.edu.sg"
@@ -173,7 +172,7 @@ def get_csv_path_for(faculty, uni) -> str:
     by checking for existing CSV files.
     """
     fname = faculty.get("name") or faculty.get("id") or "faculty"
-    uname_id = uni.get("id") or uni.get("name") or "univ"
+    uname_id = uni.get("id") or uni.get("university") or "univ"
     # Normalize minimal characters to keep paths safe and consistent
     safe_uname = str(uname_id).replace(" ", "_")
     return os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{safe_uname}.csv")
@@ -266,7 +265,7 @@ def process_combination(faculty, uni):
     uni: {id, name}
     """
     fname = faculty.get("name") or faculty.get("id") or "faculty"
-    uname_id = uni.get("id") or uni.get("name") or "univ"
+    uname_id = uni.get("id") or uni.get("university") or "univ"
     csv_path = get_csv_path_for(faculty, uni)
     if os.path.exists(csv_path):
         print(f"⏩ Already downloaded: {fname} | {uni.get('name') or uni.get('id')}")
@@ -325,14 +324,14 @@ def process_combination(faculty, uni):
             print(f"📄 Parsed export format: {fmt}")
             df["Faculty"] = faculty.get("name")
             df["Faculty ID"] = faculty.get("id")
-            df["University"] = uni.get("name")
+            df["University"] = uni.get("university")
             df["University ID"] = uni.get("id")
             df.to_csv(csv_path, index=False)
             print(f"✅ Saved: {csv_path}")
             return df
 
         except (PlaywrightTimeoutError, Exception) as e:
-            print(f"⚠️ Attempt {attempt} failed for {fname} | {uni.get('name') or uni.get('id')}: {e}")
+            print(f"⚠️ Attempt {attempt} failed for {fname} | {uni.get('university') or uni.get('id')}: {e}")
             if attempt < MAX_RETRIES:
                 print(f"⏳ Retrying in {RETRY_DELAY}s...")
                 time.sleep(RETRY_DELAY)
@@ -352,7 +351,7 @@ print("➡️ Obtained list of faculties: " + ", ".join([(f.get('name') or f.get
 # Derive universities
 partner_unis = derive_items_from_csv(
         UNI_CSV,
-        value_cols=["org", "search", "name"],
+        value_cols=["university"],
     )
 print("➡️ Obtained list of universities: " + ", ".join([((u.get('name') or '') + (f" ({u.get('id')})" if u.get('id') else '')) for u in partner_unis]))
 print(f"Discovered {len(faculties)} faculties × {len(partner_unis)} universities")
@@ -381,7 +380,7 @@ with sync_playwright() as p:
     for f in faculties:
         for u in partner_unis:
             disp_f = f.get('name')
-            disp_u = u.get('name')
+            disp_u = u.get('university')
             expected_csv = get_csv_path_for(f, u)
             if os.path.exists(expected_csv):
                 print(f"⏩ Resume skip (exists): {os.path.basename(expected_csv)}")
