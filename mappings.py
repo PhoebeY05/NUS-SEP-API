@@ -166,6 +166,18 @@ def read_download_to_df(path):
     raise ValueError("Unknown or unsupported export format (not XLS/XLSX/HTML)")
 
 
+def get_csv_path_for(faculty, uni) -> str:
+    """Derive the output CSV path for a faculty/university combination using
+    the same filename convention throughout the script. This enables resuming
+    by checking for existing CSV files.
+    """
+    fname = faculty.get("name") or faculty.get("id") or "faculty"
+    uname_id = uni.get("id") or uni.get("name") or "univ"
+    # Normalize minimal characters to keep paths safe and consistent
+    safe_uname = str(uname_id).replace(" ", "_")
+    return os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{safe_uname}.csv")
+
+
 def click_download_excel(root, page):
     """Robustly trigger the Excel download for the mappings grid.
     Tries multiple selectors and a direct JS submitAction fallback.
@@ -254,7 +266,7 @@ def process_combination(faculty, uni):
     """
     fname = faculty.get("name") or faculty.get("id") or "faculty"
     uname_id = uni.get("id") or uni.get("name") or "univ"
-    csv_path = os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{uname_id.replace(' ','_')}.csv")
+    csv_path = get_csv_path_for(faculty, uni)
     if os.path.exists(csv_path):
         print(f"⏩ Already downloaded: {fname} | {uni.get('name') or uni.get('id')}")
         return pd.read_csv(csv_path)
@@ -305,7 +317,7 @@ def process_combination(faculty, uni):
 
             # Robustly trigger the Excel download
             download = click_download_excel(root, page)
-            xls_path = os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{uname_id.replace(' ','_')}.xls")
+            xls_path = os.path.join(MAPPING_DOWNLOAD_DIR, f"{fname}_{str(uname_id).replace(' ','_')}.xls")
             download.save_as(xls_path)
 
             df, fmt = read_download_to_df(xls_path)
@@ -366,6 +378,10 @@ with sync_playwright() as p:
         for u in partner_unis:
             disp_f = f.get('name')
             disp_u = u.get('name')
+            expected_csv = get_csv_path_for(f, u)
+            if os.path.exists(expected_csv):
+                print(f"⏩ Resume skip (exists): {os.path.basename(expected_csv)}")
+                continue
             print(f"➡️ Processing: {disp_f} | {disp_u}")
             df = process_combination(f, u)
             if df is not None:
