@@ -135,11 +135,3 @@ def print_new_stage(msg):
     print(f"⭐ [{current_time}] {msg}")
 
 
-def get_partner_universities():
-    organisations = derive_items_from_csv(
-        "data/organisations.csv",
-        value_cols=["org", "search", "name"],
-    )
-    partner_universities = list(filter(lambda u: u.get('org') == "SCHL", organisations))
-    return partner_universities
-
