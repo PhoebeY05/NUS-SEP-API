@@ -86,13 +86,13 @@ def _normalize_text(s: str) -> str:
     s = s.replace("inst", "institute").replace(" sch ", " school ")
     return s.strip()
 
-def _interactive_fuzzy_fill_ids(uni_df: pd.DataFrame, org_df: pd.DataFrame, threshold: float = 0.86) -> pd.DataFrame:
+def _interactive_fuzzy_fill_ids(uni_df: pd.DataFrame, org_df: pd.DataFrame, threshold: float = 0.75) -> pd.DataFrame:
     """Interactively suggest organisation IDs for unmatched university names.
 
     - Shows top candidates by difflib similarity on normalized names.
     - Accept by entering option number; 'n' for next page; 's' skip; 'q' quit;
       or 'id:<VALUE>' to set an ID manually.
-    - Can search in organisations.csv to manually set ID
+    - Can search in organisations.csv to find ID for a specific name (if multiple values, choose the one where org == "SCHL")
     """
     import difflib
 
