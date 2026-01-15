@@ -24,8 +24,11 @@ mv "/path/to/your/SEP-Credit-Transfer-Calculator.xlsx" ./SEP-Credit-Transfer-Cal
 1. Generate CSVs under `data/`:
 
 ```bash
-# Build base CSVs (faculties, organisations, universities)
+# Build base CSVs (faculties, organisations, universities, mappings) for updated data
+python faculties.py
+python organisations.py
 python universities.py
+python mappings.py
 
 # Optional: run only the post-processing (Step 8) on existing CSVs
 python test.py --fuzzy
@@ -36,6 +39,7 @@ This produces at minimum:
 - data/faculties.csv
 - data/organisations.csv
 - data/universities.csv
+- data/universities_by_faculty.csv
 - data/mappings/master_partner_mappings.csv
 
 1. Start the server:
