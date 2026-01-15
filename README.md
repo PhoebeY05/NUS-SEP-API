@@ -12,7 +12,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-2. Download or place the SEP Credit Transfer Calculator Excel file:
+1. Download or place the SEP Credit Transfer Calculator Excel file:
 
 ```bash
 # Place the Excel at the repo root with this exact name
@@ -21,7 +21,7 @@ pip install -r requirements.txt
 mv "/path/to/your/SEP-Credit-Transfer-Calculator.xlsx" ./SEP-Credit-Transfer-Calculator.xlsx
 ```
 
-3. Generate CSVs under `data/`:
+1. Generate CSVs under `data/`:
 
 ```bash
 # Build base CSVs (faculties, organisations, universities)
@@ -38,7 +38,7 @@ This produces at minimum:
 - data/universities.csv
 - data/mappings/master_partner_mappings.csv
 
-4. Start the server:
+1. Start the server:
 
 ```bash
 python main.py
@@ -63,12 +63,14 @@ The server runs on `http://localhost:8000`.
 | GET    | /mappings          | json     | Mappings JSON (records)                                                     | faculty_id, university_id, faculty, university, limit, offset                                                   |
 
 Notes:
+
 - All endpoints support dynamic per-column filters described below (except reserved params).
 - CSV endpoints stream with Content-Type: text/csv and Content-Disposition attachment headers.
 
 ### Dynamic per-column filters
 
 Every column present in the underlying CSV can be filtered via query parameters:
+
 - Default behavior if no operator is provided:
   - String columns: case-insensitive contains
   - Non-string columns: equality
@@ -124,6 +126,7 @@ Supported operators (suffix after column name):
 - The server uses pandas for filtering; large files may benefit from additional indexing or chunked reading if needed.
 
 Data preparation notes:
+
 - `faculties.py` and `organisations.py` scrapes Edurec to obtain a list of all faculties and organisations whose id start with E
 - `universities.py` reads `SEP-Credit-Transfer-Calculator.xlsx` and writes cleaned CSVs to `data/`.
 - `mappings.py` tries all possible combinations of faculties and universities to get a master list of all mappings
