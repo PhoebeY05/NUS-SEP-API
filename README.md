@@ -30,8 +30,6 @@ python organisations.py
 python universities.py
 python mappings.py
 
-# Optional: run only the post-processing (Step 8) on existing CSVs
-python test.py --fuzzy
 ```
 
 This produces at minimum:
