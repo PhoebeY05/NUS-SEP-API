@@ -46,28 +46,63 @@ python main.py
 
 The server runs on `http://localhost:8000`.
 
-## Endpoints
+## API Specification
 
-- GET `/health` — simple health check
-- GET `/faculties.csv` — streams `data/faculties.csv`
-- GET `/organisations.csv` — streams `data/organisations.csv`
-  - Query: `org` (e.g., `SCHL`), `search` (contains), `contains` (broad contains)
-- GET `/universities.csv` — convenience for partner universities (`org=SCHL`)
-  - Query: `contains`
-- GET `/mappings.csv` — streams `data/mappings/master_partner_mappings.csv` if present; otherwise merges all CSVs in `data/mappings/`
-  - Query: `faculty_id`, `university_id`, `faculty`, `university`
+### Endpoints
 
-JSON variants:
+| Method | Path               | Response | Description                                                                 | Explicit Query Params                                                                                          |
+|--------|--------------------|----------|-----------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
+| GET    | /health            | text     | Health check                                                                | —                                                                                                               |
+| GET    | /faculties.csv     | csv      | Streams data/faculties.csv                                                  | —                                                                                                               |
+| GET    | /faculties         | json     | Faculties JSON (records)                                                    | limit, offset                                                                                                   |
+| GET    | /organisations.csv | csv      | Streams data/organisations.csv                                              | org (exact, case-insensitive), search (contains, case-insensitive), contains (broad contains across all cols)   |
+| GET    | /organisations     | json     | Organisations JSON (records)                                                | org, search, contains, limit, offset                                                                            |
+| GET    | /universities.csv  | csv      | Streams data/universities.csv                                               | country (exact, case-insensitive), region (exact, case-insensitive), name (contains), contains                  |
+| GET    | /universities      | json     | Universities JSON (records)                                                 | country, region, name, contains, limit, offset                                                                  |
+| GET    | /mappings.csv      | csv      | Streams merged mappings (master or all csvs under data/mappings)            | faculty_id (exact), university_id (exact), faculty (contains), university (contains)                            |
+| GET    | /mappings          | json     | Mappings JSON (records)                                                     | faculty_id, university_id, faculty, university, limit, offset                                                   |
 
-- GET `/faculties` — returns JSON records (supports `limit`, `offset`)
-- GET `/organisations` — JSON with same filters as the CSV endpoint plus `limit`, `offset`
-- GET `/universities` — JSON with filters `country`, `region`, `name`, `contains`, plus `limit`, `offset`
-- GET `/mappings` — JSON with same filters as the CSV endpoint plus `limit`, `offset`
+Notes:
+- All endpoints support dynamic per-column filters described below (except reserved params).
+- CSV endpoints stream with Content-Type: text/csv and Content-Disposition attachment headers.
 
-Unique university names:
+### Dynamic per-column filters
 
-- GET `/university-names.csv` — one-column CSV (`name`) of unique universities
-- GET `/university-names` — JSON records with a single `name` field (supports `contains`, `limit`, `offset`)
+Every column present in the underlying CSV can be filtered via query parameters:
+- Default behavior if no operator is provided:
+  - String columns: case-insensitive contains
+  - Non-string columns: equality
+
+Supported operators (suffix after column name):
+
+| Pattern            | Meaning                                   | Applies to     | Example                                 |
+|--------------------|-------------------------------------------|----------------|-----------------------------------------|
+| col=value          | Default (contains for strings, eq otherwise) | strings, numbers | ?name=oxford, ?id=123                    |
+| col__eq=value      | Exact match (case-insensitive for strings) | strings, numbers | ?country__eq=United States               |
+| col__contains=value| Case-insensitive substring match           | strings        | ?name__contains=Tokyo                    |
+| col__in=a,b,c      | Membership in list                         | strings, numbers | ?region__in=eu,asia                      |
+| col__gt=value      | Greater than                               | numbers        | ?rank__gt=100                            |
+| col__ge=value      | Greater than or equal                      | numbers        | ?rank__ge=50                             |
+| col__lt=value      | Less than                                  | numbers        | ?rank__lt=20                             |
+| col__le=value      | Less than or equal                         | numbers        | ?rank__le=10                             |
+| col__ne=value      | Not equal                                  | strings, numbers | ?org__ne=SCHL                            |
+
+### Reserved parameters (not treated as column filters)
+
+| Param          | Used by                    | Description                                              |
+|----------------|----------------------------|----------------------------------------------------------|
+| limit          | JSON endpoints             | Max rows to return                                       |
+| offset         | JSON endpoints             | Rows to skip                                             |
+| contains       | org/universities endpoints | Broad contains across all columns                        |
+| country        | universities               | Explicit filter (exact, case-insensitive)                |
+| region         | universities               | Explicit filter (exact, case-insensitive)                |
+| name           | universities               | Explicit filter (contains)                               |
+| org            | organisations              | Explicit filter (exact, case-insensitive)                |
+| search         | organisations              | Explicit filter (contains)                               |
+| faculty_id     | mappings                   | Explicit filter (exact)                                  |
+| university_id  | mappings                   | Explicit filter (exact)                                  |
+| faculty        | mappings                   | Explicit filter (contains)                               |
+| university     | mappings                   | Explicit filter (contains)                               |
 
 ## Examples
 
