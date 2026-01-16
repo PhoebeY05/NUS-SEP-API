@@ -36,6 +36,15 @@ def df_to_json_records(
         df = df.iloc[offset:]
     if limit is not None and limit >= 0:
         df = df.iloc[:limit]
+    # Replace NaN/NaT and +/-Inf with None to ensure JSON compliance
+    try:
+        df = df.replace([float('inf'), float('-inf')], None)
+        # Ensure columns can hold Python None (not coerced back to NaN)
+        df = df.astype(object)
+        df = df.where(pd.notna(df), None)
+    except Exception:
+        # Fallback: best-effort nulling
+        df = df.where(pd.notna(df), None)
     return df.to_dict(orient="records")
 
 
