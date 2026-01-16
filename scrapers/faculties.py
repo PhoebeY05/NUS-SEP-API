@@ -5,7 +5,9 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import pandas as pd
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 from playwright.sync_api import sync_playwright
-from utilities import close_modal, derive_items_from_csv, navigate_to_search_course_mappings, resolve_component_root
+from utilities import (close_modal, derive_items_from_csv,
+                       navigate_to_search_course_mappings,
+                       resolve_component_root)
 
 EDUREC_HOME = "https://myedurec.nus.edu.sg"
 DOWNLOAD_DIR = "data"

@@ -1,5 +1,6 @@
-# Program to retrieve all past course mappings => ~2 hours
+# Program to retrieve all past course mappings => ~2 hours per faculty
 
+import glob
 import os
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -16,7 +17,7 @@ DOWNLOAD_DIR = "data/"
 MAPPING_DOWNLOAD_DIR = DOWNLOAD_DIR + "mappings/"
 os.makedirs(DOWNLOAD_DIR, exist_ok=True)
 os.makedirs(MAPPING_DOWNLOAD_DIR, exist_ok=True)
-MASTER_CSV_PATH = os.path.join(MAPPING_DOWNLOAD_DIR, "master_partner_mappings.csv")
+MASTER_CSV_PATH = os.path.join(DOWNLOAD_DIR, "master_partner_mappings.csv")
 SEARCH_PAGE = None
 FACULTIES_CSV = os.path.join(DOWNLOAD_DIR, "faculties.csv")
 UNI_CSV = os.path.join(DOWNLOAD_DIR, "universities.csv")
@@ -350,9 +351,9 @@ faculties = derive_items_from_csv(
 print("➡️ Obtained list of faculties: " + ", ".join([(f.get('name') or f.get('id') or '') for f in faculties]))
 # Derive universities
 partner_unis = derive_items_from_csv(
-        UNI_CSV,
-        value_cols=["university"],
-    )
+    UNI_CSV,
+    value_cols=["university"],
+)
 print("➡️ Obtained list of universities: " + ", ".join([((u.get('name') or '') + (f" ({u.get('id')})" if u.get('id') else '')) for u in partner_unis]))
 print(f"Discovered {len(faculties)} faculties × {len(partner_unis)} universities")
 
@@ -394,25 +395,63 @@ with sync_playwright() as p:
     context.close()
     browser.close()
 
+
+def combine_all_csvs(csv_folder, output_path):
+    all_files = glob.glob(os.path.join(csv_folder, "*.csv"))
+    if not all_files:
+        pd.DataFrame().to_csv(output_path, index=False)
+        return
+
+    df = pd.concat([pd.read_csv(f) for f in all_files], ignore_index=True)
+
+    # Identify NUS course columns (case-insensitive, flexible matching)
+    def _norm(s: str):
+        return s.strip().lower().replace(" ", "_")
+
+    cols_norm = {_norm(c): c for c in df.columns}
+    # Candidates: any column containing 'nus' and ('course' or 'module')
+    nus_cols = [
+        orig for norm, orig in cols_norm.items()
+        if ("nus" in norm)
+    ]
+
+    # Helper to detect blank-like values
+    def _is_blank(x):
+        if pd.isna(x):
+            return True
+        if isinstance(x, str):
+            s = x.replace("\u00a0", " ").replace("\u200b", "").strip().lower()
+            return s in {"", "na", "n/a", "none", "null", "nan", "-", "—", "–"}
+        return False
+
+    # Drop rows where ALL NUS course-related columns are blank
+    if nus_cols:
+        subset = df[nus_cols]
+        all_nus_blank = subset.map(_is_blank).all(axis=1)
+        df = df.loc[~all_nus_blank]
+    else:
+        # If no NUS columns found, keep as-is but emit a hint for discoverability
+        print("⚠️ No NUS course columns detected; nothing filtered.")
+
+    df.to_csv(output_path, index=False)
+
+
 # Merge into master CSV
-if all_csvs:
-    pd.concat(all_csvs, ignore_index=True).to_csv(MASTER_CSV_PATH, index=False)
-    print(f"✅ Master CSV created: {MASTER_CSV_PATH}")
-    # Cleanup: remove per-combination XLS/CSV files, keep only the master
-    try:
-        master_abs = os.path.abspath(MASTER_CSV_PATH)
-        for fname in os.listdir(MAPPING_DOWNLOAD_DIR):
-            fp = os.path.join(MAPPING_DOWNLOAD_DIR, fname)
-            if not os.path.isfile(fp):
-                continue
-            ext = os.path.splitext(fname)[1].lower()
-            if ext in (".xls", ".csv") and os.path.abspath(fp) != master_abs:
-                try:
-                    os.remove(fp)
-                except Exception:
-                    pass
-        print("🧹 Cleaned up per-combination XLS/CSV files")
-    except Exception as e:
-        print(f"⚠️ Cleanup failed: {e}")
-else:
-    print("⚠️ No CSVs to merge")
+combine_all_csvs(MAPPING_DOWNLOAD_DIR, MASTER_CSV_PATH)
+print(f"✅ Master CSV created: {MASTER_CSV_PATH}")
+# Cleanup: remove per-combination XLS/CSV files, keep only the master
+try:
+    master_abs = os.path.abspath(MASTER_CSV_PATH)
+    for fname in os.listdir(MAPPING_DOWNLOAD_DIR):
+        fp = os.path.join(MAPPING_DOWNLOAD_DIR, fname)
+        if not os.path.isfile(fp):
+            continue
+        ext = os.path.splitext(fname)[1].lower()
+        if ext in (".xls") and os.path.abspath(fp) != master_abs:
+            try:
+                os.remove(fp)
+            except Exception:
+                pass
+    print("🧹 Cleaned up per-combination XLS files")
+except Exception as e:
+    print(f"⚠️ Cleanup failed: {e}")

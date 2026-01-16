@@ -1,7 +1,7 @@
 # Program to retrieve all organisations (that start with E...) => ~2 hours
+import json
 import os
 import sys
-import json
 from datetime import datetime, timezone
 
 import pandas as pd

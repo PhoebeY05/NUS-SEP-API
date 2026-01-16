@@ -133,5 +133,3 @@ def print_new_stage(msg):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print(f"⭐ [{current_time}] {msg}")
-
-
