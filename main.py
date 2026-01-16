@@ -12,8 +12,6 @@ app = FastAPI(title="SEP EduRec CSV API", version="0.1.0")
 # Base paths
 ROOT = Path(__file__).parent
 data = ROOT / "data"
-MAPPINGS_DIR = data / "mappings"
-
 
 def df_to_csv_response(df: pd.DataFrame, filename: str) -> StreamingResponse:
     """Return DataFrame as a CSV StreamingResponse with sensible headers."""
@@ -316,6 +314,40 @@ def get_universities_json(
     return df_to_json_records(df, limit=limit, offset=offset)
 
 
+@app.get("/universities/ids")
+def get_university_ids_json():
+    """Return a compact JSON list of all universities with their IDs: [{id, name}]."""
+    path = data / "universities.csv"
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="universities.csv not found")
+    try:
+        df = pd.read_csv(path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed reading universities.csv: {e}")
+
+    # Resolve id/name columns flexibly (case-insensitive, common aliases)
+    norm = {c.strip().lower(): c for c in df.columns}
+    id_candidates = ["id", "university id", "university_id"]
+    name_candidates = ["name", "university", "university name", "university_name"]
+
+    id_col = next((norm[n] for n in id_candidates if n in norm), None)
+    name_col = next((norm[n] for n in name_candidates if n in norm), None)
+
+    if not id_col or not name_col:
+        raise HTTPException(status_code=500, detail="Could not locate university id/name columns")
+
+    out = (
+        df[[id_col, name_col]]
+        .dropna(subset=[id_col, name_col])
+        .drop_duplicates(subset=[id_col])
+        .rename(columns={id_col: "id", name_col: "name"})
+        .sort_values("name", key=lambda s: s.astype(str).str.lower())
+        .reset_index(drop=True)
+    )
+
+    return df_to_json_records(out)
+
+
 @app.get("/mappings.csv")
 def get_mappings_csv(
     faculty_id: Optional[str] = Query(None, description="Filter by Faculty ID"),
@@ -325,7 +357,7 @@ def get_mappings_csv(
     request: Request = None,
 ):
     """Return the master_partner_mappings.csv if available, else merge all mapping CSVs in data/mappings."""
-    master = MAPPINGS_DIR / "master_partner_mappings.csv"
+    master = data / "master_partner_mappings.csv"
     dfs: list[pd.DataFrame] = []
     if master.exists():
         try:
@@ -335,9 +367,9 @@ def get_mappings_csv(
         dfs.append(df)
     else:
         # Merge individual CSVs if present
-        if not MAPPINGS_DIR.exists():
+        if not data.exists():
             raise HTTPException(status_code=404, detail="No mappings directory found")
-        for p in sorted(MAPPINGS_DIR.glob("*.csv")):
+        for p in sorted(data.glob("*.csv")):
             try:
                 dfs.append(pd.read_csv(p))
             except Exception:
@@ -370,7 +402,7 @@ def get_mappings_json(
     offset: Optional[int] = Query(None, ge=0, description="Rows to skip"),
     request: Request = None,
 ):
-    master = MAPPINGS_DIR / "master_partner_mappings.csv"
+    master = data / "master_partner_mappings.csv"
     dfs: list[pd.DataFrame] = []
     if master.exists():
         try:
@@ -379,9 +411,9 @@ def get_mappings_json(
             raise HTTPException(status_code=500, detail=f"Failed reading master_partner_mappings.csv: {e}")
         dfs.append(df)
     else:
-        if not MAPPINGS_DIR.exists():
+        if not data.exists():
             raise HTTPException(status_code=404, detail="No mappings directory found")
-        for p in sorted(MAPPINGS_DIR.glob("*.csv")):
+        for p in sorted(data.glob("*.csv")):
             try:
                 dfs.append(pd.read_csv(p))
             except Exception:

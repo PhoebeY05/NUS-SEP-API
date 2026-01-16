@@ -61,6 +61,7 @@ The server runs on `http://localhost:8000`.
 | GET    | /organisations     | json     | Organisations JSON (records)                                                | org, search, contains, limit, offset                                                                            |
 | GET    | /universities.csv  | csv      | Streams data/universities.csv                                               | country (exact, case-insensitive), region (exact, case-insensitive), name (contains), contains                  |
 | GET    | /universities      | json     | Universities JSON (records)                                                 | country, region, name, contains, limit, offset                                                                  |
+| GET    | /universities/id      | json     | Universities JSON with ID only N                                                 | -                                                   |
 | GET    | /mappings.csv      | csv      | Streams merged mappings (master or all csvs under data/mappings)            | faculty_id (exact), university_id (exact), faculty (contains), university (contains)                            |
 | GET    | /mappings          | json     | Mappings JSON (records)                                                     | faculty_id, university_id, faculty, university, limit, offset                                                   |
 
