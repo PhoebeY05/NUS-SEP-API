@@ -66,8 +66,37 @@ RESERVED_PARAMS = {
 }
 
 
+def _resolve_column(
+    df: pd.DataFrame,
+    col: str,
+    aliases: dict[str, list[str] | str] | None = None,
+) -> Optional[str]:
+    """Resolve a requested column name to an actual DataFrame column.
+    Resolution order:
+      1) Exact match
+      2) Case-insensitive match
+      3) Aliases mapping (first present candidate, case-insensitive)
+    Returns the concrete column name or None if not found.
+    """
+    if col in df.columns:
+        return col
+    norm = {c.strip().lower(): c for c in df.columns}
+    if col.strip().lower() in norm:
+        return norm[col.strip().lower()]
+    if aliases and col in aliases:
+        candidates = aliases[col]
+        if isinstance(candidates, str):
+            candidates = [candidates]
+        for cand in candidates:
+            if cand in df.columns:
+                return cand
+            if cand.strip().lower() in norm:
+                return norm[cand.strip().lower()]
+    return None
+
+
 def apply_dynamic_filters(
-    df: pd.DataFrame, query_params, exclude: set[str] | None = None
+    df: pd.DataFrame, query_params, exclude: set[str] | None = None, aliases: dict[str, list[str] | str] | None = None
 ) -> pd.DataFrame:
     """
     Apply filters for any column found in query params.
@@ -90,10 +119,11 @@ def apply_dynamic_filters(
         if "__" in key:
             col, op = key.split("__", 1)
 
-        if col not in df.columns:
+        target_col = _resolve_column(df, col, aliases)
+        if not target_col:
             continue
 
-        s = df[col]
+        s = df[target_col]
         # Build mask per operator
         if op in (None, "contains"):
             if pd.api.types.is_string_dtype(s):
@@ -277,15 +307,25 @@ def get_universities_csv(
         df = df[df["country"].astype(str).str.lower() == country.strip().lower()]
     if region and "region" in df.columns:
         df = df[df["region"].astype(str).str.lower() == region.strip().lower()]
-    if name and "name" in df.columns:
-        df = df[df["name"].astype(str).str.contains(name, case=False, na=False)]
+    if name:
+        name_col = _resolve_column(df, "name", aliases={"name": ["name", "university"]})
+        if name_col:
+            df = df[df[name_col].astype(str).str.contains(name, case=False, na=False)]
     if contains:
         mask = pd.Series(False, index=df.index)
         for col in df.columns:
             mask = mask | df[col].astype(str).str.contains(contains, case=False, na=False)
         df = df[mask]
     # Apply dynamic per-column filters
-    df = apply_dynamic_filters(df, request.query_params, exclude=RESERVED_PARAMS)
+    df = apply_dynamic_filters(
+        df,
+        request.query_params,
+        exclude=RESERVED_PARAMS,
+        aliases={
+            "name": ["name", "university"],
+            "id": ["id", "university id", "university_id"],
+        },
+    )
     return df_to_csv_response(df, "universities.csv")
 
 
@@ -311,15 +351,25 @@ def get_universities_json(
         df = df[df["country"].astype(str).str.lower() == country.strip().lower()]
     if region and "region" in df.columns:
         df = df[df["region"].astype(str).str.lower() == region.strip().lower()]
-    if name and "name" in df.columns:
-        df = df[df["name"].astype(str).str.contains(name, case=False, na=False)]
+    if name:
+        name_col = _resolve_column(df, "name", aliases={"name": ["name", "university"]})
+        if name_col:
+            df = df[df[name_col].astype(str).str.contains(name, case=False, na=False)]
     if contains:
         mask = pd.Series(False, index=df.index)
         for col in df.columns:
             mask = mask | df[col].astype(str).str.contains(contains, case=False, na=False)
         df = df[mask]
     # Apply dynamic per-column filters
-    df = apply_dynamic_filters(df, request.query_params, exclude=RESERVED_PARAMS)
+    df = apply_dynamic_filters(
+        df,
+        request.query_params,
+        exclude=RESERVED_PARAMS,
+        aliases={
+            "name": ["name", "university"],
+            "id": ["id", "university id", "university_id"],
+        },
+    )
     return df_to_json_records(df, limit=limit, offset=offset)
 
 
