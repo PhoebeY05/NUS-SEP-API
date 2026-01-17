@@ -25,10 +25,10 @@ mv "/path/to/your/SEP-Credit-Transfer-Calculator.xlsx" ./SEP-Credit-Transfer-Cal
 
 ```bash
 # Build base CSVs (faculties, organisations, universities, mappings) for updated data
-python faculties.py
-python organisations.py
-python universities.py
-python mappings.py
+python scrapers/faculties.py
+python scrapers/organisations.py
+python scrapers/universities.py
+python scrapers/mappings.py
 
 ```
 
@@ -61,7 +61,7 @@ The server runs on `http://localhost:8000`.
 | GET    | /organisations     | json     | Organisations JSON (records)                                                | org, search, contains, limit, offset                                                                            |
 | GET    | /universities.csv  | csv      | Streams data/universities.csv                                               | country (exact, case-insensitive), region (exact, case-insensitive), name (contains), contains                  |
 | GET    | /universities      | json     | Universities JSON (records)                                                 | country, region, name, contains, limit, offset                                                                  |
-| GET    | /universities/id      | json     | Universities JSON with ID only N                                                 | -                                                   |
+| GET    | /universities/ids     | json     | JSON list of universities with compact id+name pairs                            | —                                                   |
 | GET    | /mappings.csv      | csv      | Streams merged mappings (master or all csvs under data/mappings)            | faculty_id (exact), university_id (exact), faculty (contains), university (contains)                            |
 | GET    | /mappings          | json     | Mappings JSON (records)                                                     | faculty_id, university_id, faculty, university, limit, offset                                                   |
 
@@ -92,6 +92,11 @@ Supported operators (suffix after column name):
 | col__le=value      | Less than or equal                         | numbers        | ?rank__le=10                             |
 | col__ne=value      | Not equal                                  | strings, numbers | ?org__ne=SCHL                            |
 
+Normalization and aliasing:
+
+- Inputs are normalised for robust matching: diacritics stripped, lowercased, and non-alphanumeric characters removed. For purely numeric inputs, leading zeros are collapsed (003 = 03 = 3).
+- Common aliases are supported in endpoints. For universities, `name` filters are applied to the `university` column. Example: `?name__contains=Universitycollegedublin` matches "University College Dublin".
+
 ### Reserved parameters (not treated as column filters)
 
 | Param          | Used by                    | Description                                              |
@@ -116,9 +121,12 @@ Supported operators (suffix after column name):
 - All organisations with `org=SCHL`:
   - `http://localhost:8000/organisations.csv?org=SCHL`
 - Universities containing "Tokyo":
-  - `http://localhost:8000/universities.csv?contains=Tokyo`
-- Unique university names containing "Tech":
-  - `http://localhost:8000/university-names?contains=Tech&limit=50`
+  - `http://localhost:8000/universities.csv?name__contains=Tokyo`
+  - `http://localhost:8000/universities?name__contains=Tokyo&limit=50`
+- Normalised matching (spacing/punctuation-insensitive):
+  - `http://localhost:8000/universities?name__contains=Universitycollegedublin` → matches "University College Dublin"
+- ID list (compact):
+  - `http://localhost:8000/universities/ids`
 - Mappings filtered by a faculty ID:
   - `http://localhost:8000/mappings.csv?faculty_id=SCI`
 
@@ -127,6 +135,11 @@ Supported operators (suffix after column name):
 - CSV endpoints stream with `Content-Type: text/csv` and `Content-Disposition` attachment headers.
 - If a source CSV is missing, the endpoint returns 404.
 - The server uses pandas for filtering; large files may benefit from additional indexing or chunked reading if needed.
+
+Filter normalisation notes:
+
+- String comparisons are normalised (lowercased, spaces/punctuation removed), enabling flexible matching.
+- Numeric filters for purely digit values ignore leading zeros.
 
 Data preparation notes:
 
