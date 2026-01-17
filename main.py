@@ -1,3 +1,5 @@
+import re
+import unicodedata
 from io import StringIO
 from pathlib import Path
 from typing import Optional
@@ -64,6 +66,43 @@ RESERVED_PARAMS = {
     "faculty",
     "university",
 }
+def normalize_text(value: Optional[str]) -> str:
+    """Return a normalised token for robust matching.
+    Rules:
+      - Unicode NFKD, strip diacritics
+      - Lowercase
+      - Remove all non-alphanumeric characters (spaces, punctuation)
+      - If result is purely digits, strip leading zeros (003 -> 3)
+    """
+    if value is None:
+        return ""
+    s = str(value)
+    # Unicode normalisation and strip diacritics
+    s = unicodedata.normalize("NFKD", s)
+    s = "".join(ch for ch in s if not unicodedata.combining(ch))
+    s = s.lower()
+    # remove non-alphanumeric
+    s = re.sub(r"[^0-9a-z]", "", s)
+    if s.isdigit():
+        try:
+            return str(int(s))
+        except Exception:
+            return s.lstrip("0") or "0"
+    return s
+
+
+def normalized_series(s: pd.Series) -> pd.Series:
+    return s.astype(str).map(normalize_text)
+
+
+def contains_normalized(s: pd.Series, needle: str) -> pd.Series:
+    ns = normalized_series(s)
+    nn = normalize_text(needle)
+    if not nn:
+        # Empty needle -> match nothing
+        return pd.Series(False, index=s.index)
+    return ns.str.contains(nn, regex=False, na=False)
+
 
 
 def _resolve_column(
@@ -126,33 +165,34 @@ def apply_dynamic_filters(
         s = df[target_col]
         # Build mask per operator
         if op in (None, "contains"):
-            if pd.api.types.is_string_dtype(s):
+            if pd.api.types.is_string_dtype(s) or s.dtype == object:
                 mask = pd.Series(False, index=df.index)
                 for v in values:
-                    mask |= s.astype(str).str.contains(str(v), case=False, na=False)
+                    mask |= contains_normalized(s, v)
             else:
-                # non-string default to equality; fallback to contains if coercion fails
+                # non-string default to equality; fallback to normalized contains if coercion fails
                 mask = pd.Series(False, index=df.index)
                 for v in values:
                     num = pd.to_numeric(v, errors="coerce")
                     try:
                         mask |= (s == num)
                     except Exception:
-                        mask |= s.astype(str).str.contains(str(v), case=False, na=False)
+                        mask |= contains_normalized(s.astype(str), v)
         elif op == "eq":
-            if pd.api.types.is_string_dtype(s):
+            if pd.api.types.is_string_dtype(s) or s.dtype == object:
+                ns = normalized_series(s)
                 mask = pd.Series(False, index=df.index)
                 for v in values:
-                    mask |= (s.astype(str).str.lower() == str(v).lower())
+                    mask |= (ns == normalize_text(v))
             else:
                 mask = pd.Series(False, index=df.index)
                 for v in values:
                     mask |= (s == pd.to_numeric(v, errors="coerce"))
         elif op == "in":
             # membership in comma-separated list
-            if pd.api.types.is_string_dtype(s):
-                targets = {t.strip().lower() for v in values for t in str(v).split(",")}
-                mask = s.astype(str).str.lower().isin(targets)
+            if pd.api.types.is_string_dtype(s) or s.dtype == object:
+                targets = {normalize_text(t) for v in values for t in str(v).split(",")}
+                mask = normalized_series(s).isin(targets)
             else:
                 targets = [pd.to_numeric(t.strip(), errors="coerce") for v in values for t in str(v).split(",")]
                 mask = s.isin(targets)
@@ -304,17 +344,17 @@ def get_universities_csv(
 
     # Apply explicit filters
     if country and "country" in df.columns:
-        df = df[df["country"].astype(str).str.lower() == country.strip().lower()]
+        df = df[normalized_series(df["country"]) == normalize_text(country)]
     if region and "region" in df.columns:
-        df = df[df["region"].astype(str).str.lower() == region.strip().lower()]
+        df = df[normalized_series(df["region"]) == normalize_text(region)]
     if name:
         name_col = _resolve_column(df, "name", aliases={"name": ["name", "university"]})
         if name_col:
-            df = df[df[name_col].astype(str).str.contains(name, case=False, na=False)]
+            df = df[contains_normalized(df[name_col], name)]
     if contains:
         mask = pd.Series(False, index=df.index)
         for col in df.columns:
-            mask = mask | df[col].astype(str).str.contains(contains, case=False, na=False)
+            mask = mask | contains_normalized(df[col], contains)
         df = df[mask]
     # Apply dynamic per-column filters
     df = apply_dynamic_filters(
@@ -348,17 +388,17 @@ def get_universities_json(
         raise HTTPException(status_code=500, detail=f"Failed reading universities.csv: {e}")
 
     if country and "country" in df.columns:
-        df = df[df["country"].astype(str).str.lower() == country.strip().lower()]
+        df = df[normalized_series(df["country"]) == normalize_text(country)]
     if region and "region" in df.columns:
-        df = df[df["region"].astype(str).str.lower() == region.strip().lower()]
+        df = df[normalized_series(df["region"]) == normalize_text(region)]
     if name:
         name_col = _resolve_column(df, "name", aliases={"name": ["name", "university"]})
         if name_col:
-            df = df[df[name_col].astype(str).str.contains(name, case=False, na=False)]
+            df = df[contains_normalized(df[name_col], name)]
     if contains:
         mask = pd.Series(False, index=df.index)
         for col in df.columns:
-            mask = mask | df[col].astype(str).str.contains(contains, case=False, na=False)
+            mask = mask | contains_normalized(df[col], contains)
         df = df[mask]
     # Apply dynamic per-column filters
     df = apply_dynamic_filters(
